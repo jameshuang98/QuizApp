@@ -16,4 +16,4 @@ VALUES (1, 1, 'HyperText Total Processing', false),
 (9, 3, 'HTTPS is HTTP with encryption', true),
 (10, 4, '1996', true),
 (11, 4, '2001', false),
-(12, 4, '2004', false),
+(12, 4, '2004', false);
