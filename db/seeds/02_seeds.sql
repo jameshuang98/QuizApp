@@ -1,7 +1,7 @@
 INSERT INTO users (name, email, password, created_at)
-VALUES ('David Smith', 'david.smith@gmail.com','password','2019-02-01'),
-('Jessica Johm', 'jess.john@gmail.com','password','2020-03-01'),
-('Steven Bob', 'steven.bob@gmail.com','password','2021-02-03');
+VALUES ('David Smith', 'david.smith@gmail.com','password','2019-02-01 04:05:06'),
+('Jessica John', 'jess.john@gmail.com','password','2020-03-01 03:07:06'),
+('Steven Bob', 'steven.bob@gmail.com','password','2021-02-03 14:05:06');
 
 INSERT INTO quizzes (user_id, name, created_at, subject, difficulty, public)
 VALUES (1, 'HTTP QUIZ', '2021-03-01','Web Development','easy',true);
