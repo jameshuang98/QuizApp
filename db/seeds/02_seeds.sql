@@ -5,6 +5,8 @@ VALUES ('David Smith', 'david.smith@gmail.com','password','2018-02-12T08:00:00.0
 
 INSERT INTO quizzes (user_id, name, created_at, subject, difficulty, public)
 VALUES (1, 'HTTP QUIZ', '2018-02-12T08:13:20.000Z','Web Development','easy',true);
+VALUES (1, 'Test Quiz', '2018-02-12T08:13:20.000Z','Web Development','easy',false);
+
 
 INSERT INTO questions (quiz_id, question)
 VALUES (1, 'What does HTTP stand for?'),
