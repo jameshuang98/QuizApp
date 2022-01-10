@@ -4,8 +4,8 @@ VALUES ('David Smith', 'david.smith@gmail.com','password','2018-02-12T08:00:00.0
 ('Steven Bob', 'steven.bob@gmail.com','password','2018-02-12T08:13:20.000Z');
 
 INSERT INTO quizzes (user_id, name, created_at, subject, difficulty, public)
-VALUES (1, 'HTTP QUIZ', '2018-02-12T08:13:20.000Z','Web Development','easy',true);
-VALUES (1, 'Test Quiz', '2018-02-12T08:13:20.000Z','Web Development','easy',false);
+VALUES (1, 'HTTP QUIZ', '2018-02-12T08:13:20.000Z','Web Development','easy',true),
+(1, 'Test Quiz', '2018-02-12T08:13:20.000Z','Web Development','easy',false);
 
 
 INSERT INTO questions (quiz_id, question)
@@ -28,3 +28,21 @@ VALUES (1, 'HyperText Total Processing', false),
 (4, '2001', false),
 (4, '2004', false);
 
+INSERT INTO attempts (user_id, quiz_id, attempted_at, score) 
+VALUES (1, 1, '2018-02-13T08:00:00.000Z', 4),
+(2, 1, '2018-02-13T08:00:00.000Z', 2),
+(3, 1, '2018-02-13T08:00:00.000Z', 3);
+
+INSERT INTO attempted_answers (attempt_id, answer_id) 
+VALUES (1, 2),
+(1, 6),
+(1, 9),
+(1, 10),
+(2, 2),
+(2, 5),
+(2, 9),
+(2, 12),
+(3, 1),
+(3, 6),
+(3, 9),
+(3, 12);
