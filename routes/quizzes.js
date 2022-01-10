@@ -9,7 +9,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/quizzes", (req, res) => {
+  router.get("/new", (req, res) => {
     let query = `SELECT name FROM quizzes
     WHERE quizzes.public IS true;`;
     console.log(query);
