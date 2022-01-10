@@ -28,12 +28,12 @@ VALUES (1, 'HyperText Total Processing', false),
 (4, '2001', false),
 (4, '2004', false);
 
-INSERT INTO attempts (user_id, quiz_id, attempted_at, score) 
+INSERT INTO attempts (user_id, quiz_id, attempted_at, score)
 VALUES (1, 1, '2018-02-13T08:00:00.000Z', 4),
 (2, 1, '2018-02-13T08:00:00.000Z', 2),
 (3, 1, '2018-02-13T08:00:00.000Z', 3);
 
-INSERT INTO attempted_answers (attempt_id, answer_id) 
+INSERT INTO attempted_answers (attempt_id, answer_id)
 VALUES (1, 2),
 (1, 6),
 (1, 9),
