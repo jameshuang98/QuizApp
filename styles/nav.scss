@@ -3,7 +3,7 @@ nav {
   width: 100%;
   background-color: #F8F0AB;
   color: #000000;
-  top: 0; /*to make the nav bar staty at the top*/
+  top: 0; /*to make the nav bar stay at the top*/
   position: fixed; /*overlaying the nav bar*/
   font-family: 'Roboto', 'sans-serif';
   padding: 1.5em;
@@ -13,17 +13,28 @@ nav {
   }
 
   /*Class for the TWEETER word */
-  span {
-    font-family: "Roboto", sans-serif;
-    display: flex;
-     font-size: 18px;
-    align-items: center;
-  }
+  // span {
+  //   font-family: "Roboto", sans-serif;
+  //   display: flex;
+  //    font-size: 18px;
+  //   align-items: center;
+  // }
 
-  .bold{
-    font-weight: bold;
-  }
+.bold{
+  font-weight: bold;
+}
 
-  .links_header {
-    word-spacing: 30px;
-  }
+#logo {
+  font-weight: bold;
+  width:193px;
+}
+
+.links_header {
+  word-spacing: 30px;
+}
+
+.logged_in {
+  margin-right: 10px;
+}
+
+

@@ -58,6 +58,10 @@ app.get("/quizzes/new", (req, res) => {
   res.render("new_quiz");
 });
 
+app.get("/quizzes/specificquiz", (req, res) => {
+  res.render("quiz");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
