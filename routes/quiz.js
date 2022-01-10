@@ -9,9 +9,9 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/quiz/:id", (req, res) => {
+  router.get("/:id", (req, res) => {
     const id = req.params.id
-    let query = `SELECT questions.quiz_id, questions.question, answers.answer
+    let query = `SELECT quizzes.name as quiz_name, questions.quiz_id, questions.question, answers.answer
     FROM questions
     JOIN answers ON answers.question_id = questions.id
     JOIN quizzes ON questions.quiz_id = quizzes.id
@@ -20,10 +20,11 @@ module.exports = (db) => {
     // console.log(query);
     db.query(query, [id])
       .then(data => {
-        const results = data.rows;
-        const templateVars = {results}
+        // console.log(data)
+        const questions = data.rows;
+        const templateVars = {questions}
         console.log(templateVars);
-        res.render("quiz_results", templateVars);
+        res.render("quiz", templateVars);
       })
       .catch(err => {
         res
