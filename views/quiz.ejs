@@ -46,7 +46,7 @@
 
 
   <main class="container">
-    <div class="quiz_title">HTML Quiz Title </div>
+    <div class="quiz_title"><%= questions[0].quiz_name %> </div>
     <section class="all_questions">
       <form>
 
@@ -54,27 +54,25 @@
         <article>
           <header>
             <div class="question">
-              <p>What does HTML stand for</p>
+              <p><%= questions[0].question %></p>
             </div>
           </header>
 
           <div class="answers">
             <label for='option-1a>'>
               <p><input type='radio' name='question-1' value='Hypo' id='option-1a'/>
-              Hyper</p>
+                <%= questions[0].answer %></p>
             </label>
             <label for='option-1a>'>
               <p><input type='radio' name='question-1' value='Hypo' id='option-1a'/>
-              Hypo</p>
+                <%= questions[1].answer %>/p>
             </label>
             <label for='option-1a>'>
               <p><input type='radio' name='question-1' value='Hypo' id='option-1a'/>
-              Hemo</p>
+                <%= questions[2].answer %></p>
             </label>
           </div>
 
-          <footer>
-          </footer>
         </article>
 
         <button class="button" type="submit" >Submit</button>
