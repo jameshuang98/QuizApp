@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>My Results</title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -25,8 +25,6 @@
 
 </head>
 
-
-
 <body>
   <nav>
     <span class = "bold">LOGO</span>
@@ -36,26 +34,13 @@
       <a>Create</a>
       <a>Explore</a>
     </div>
-    <!-- <a>Logged in as User</a>
-    <a>Log Out</a> -->
-    <a> login</a>
+    <a> Login</a>
   </nav>
-<!--
-  <h1>Have fun! 🥔</h1> -->
-  <!-- <div class = "create_new_quiz"> -->
-    <!-- <p>Create a new quiz</p> -->
-    <!-- <form>
-      <label>Quiz</label>
-      <input name = "Quiz name" required/>
-    </form> -->
-    
-  <!-- </div> -->
-
   <div class = "quiz_results public_quizzes">
     <table>
       <thead>
         <tr>
-          <th scope="col:">Question</th>
+          <th scope="col">Question</th>
           <th scope="col">Answer</th>
           <th scope="col">Score</th>
         </tr>
@@ -63,13 +48,16 @@
       <tbody>        
         <% for(let item of results) { %>
           <tr>
-            <td><%= item.question %><td>
+            <td><%= item.question %></td>
             <td><%= item.answer %></td>
-            <td><%= item.correct %></td>
+            <td><%= item.score %>/1</td>
           </tr>
         <% } %>
       </tbody>
     </table>
+    <div class="total">
+      <h3>Total: <%= results[0].total %>/4</h3>
+    </div>
   </div>
 </body>
 
