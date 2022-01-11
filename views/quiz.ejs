@@ -48,10 +48,10 @@
   <main class="container">
     <div class="quiz_title"><%= quiz_name %> </div>
     <section class="all_questions">
-      <form>
+      <form action='/api/quiz/<%= quiz_id %>' method='POST'>
 
         <!-- Each article will be eventually auto-generated from the database-->
-        <% for (let item of questions) { %>
+        <% questions.forEach((item, questionIndex) => {%>
         <article>
           <header>
             <div class="question">
@@ -60,22 +60,19 @@
           </header>
 
           <div class="answers">
-            <label for='option-1a>'>
-              <p><input type='radio' name='question-1' class='bubble' value='Hypo' id='option-1a'/> A:
-                <%= item.answers[0] %></p>
-            </label>
-            <label for='option-1b>'>
-              <p><input type='radio' name='question-1' class='bubble'  value='Hypo' id='option-1a'/> B:
-                <%= item.answers[1] %></p>
-            </label>
-            <label for='option-1c>'>
-              <p><input type='radio' name='question-1' class='bubble'  value='Hypo' id='option-1a'/> C:
-                <%= item.answers[2] %></p>
-            </label>
+            <% item.answers.forEach((answer, answerIndex) => { %>
+              <p><label for='option-<%= questionIndex + 1%><%= indexToLetter(answerIndex)%>  '></label>
+
+                  <input type='radio' class='bubble' name='<%= questionIndex + 1 %>' value='<%= answer.id%>' id='option-<%= questionIndex + 1%><%= indexToLetter(answerIndex)%>'/>
+                  <%= indexToLetter(answerIndex) %>:
+                  <%= answer.text %>
+              </p>
+            <% }) %>
+
           </div>
 
         </article>
-        <% } %>
+        <% }) %>
 
         <button class="button" type="submit" >Submit</button>
       </form>

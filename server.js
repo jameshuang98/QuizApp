@@ -60,9 +60,11 @@ app.get("/quizzes/new", (req, res) => {
   res.render("new_quiz");
 });
 
-app.get("/quizzes/specificquiz", (req, res) => {
-  res.render("quiz");
-});
+// Helper function used on quiz page to convert question and answer indices to letters
+app.locals.indexToLetter = function(index) {
+  const map = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+  return map[index]
+};
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
