@@ -1,14 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100%;
+  justify-content: center;
+  margin: auto;
+}
+
 .quiz_results {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   background: #FAC7D9;
-  padding-left: 5%;
-  margin-top: 10%;
-  margin-bottom: 5%;
-  padding-top: 1em;
-  height: 612px;
-  width: 80%;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  column-gap: 40px;
 }
 
 .total {
