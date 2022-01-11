@@ -46,34 +46,36 @@
 
 
   <main class="container">
-    <div class="quiz_title"><%= questions[0].quiz_name %> </div>
+    <div class="quiz_title"><%= quiz_name %> </div>
     <section class="all_questions">
       <form>
 
         <!-- Each article will be eventually auto-generated from the database-->
+        <% for (let item of questions) { %>
         <article>
           <header>
             <div class="question">
-              <p><%= questions[0].question %></p>
+              <p><%= item.question %></p>
             </div>
           </header>
 
           <div class="answers">
             <label for='option-1a>'>
-              <p><input type='radio' name='question-1' value='Hypo' id='option-1a'/>
-                <%= questions[0].answer %></p>
+              <p><input type='radio' name='question-1' class='bubble' value='Hypo' id='option-1a'/> A:
+                <%= item.answers[0] %></p>
             </label>
-            <label for='option-1a>'>
-              <p><input type='radio' name='question-1' value='Hypo' id='option-1a'/>
-                <%= questions[1].answer %>/p>
+            <label for='option-1b>'>
+              <p><input type='radio' name='question-1' class='bubble'  value='Hypo' id='option-1a'/> B:
+                <%= item.answers[1] %></p>
             </label>
-            <label for='option-1a>'>
-              <p><input type='radio' name='question-1' value='Hypo' id='option-1a'/>
-                <%= questions[2].answer %></p>
+            <label for='option-1c>'>
+              <p><input type='radio' name='question-1' class='bubble'  value='Hypo' id='option-1a'/> C:
+                <%= item.answers[2] %></p>
             </label>
           </div>
 
         </article>
+        <% } %>
 
         <button class="button" type="submit" >Submit</button>
       </form>
