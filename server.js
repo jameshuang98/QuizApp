@@ -42,17 +42,14 @@ const quizResultsRoutes = require("./routes/quiz_results");
 // const search = require("./routes/search");
 const quizRoutes = require("./routes/quiz");
 
-const quizResultsRoutes = require("./routes/quiz_results")
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
-app.use("/quizzes", quizzesRoutes(db));
-app.use("/quizzes/results", quizResultsRoutes(db));
 // app.use("/api/quizzes/search", search(db));
 app.use("/api/quiz", quizRoutes(db));
-app.use("/quizzes", quizzesRoutes(db));
-app.use("/quizzes/results", quizResultsRoutes(db));
+app.use("/api/quizzes", quizzesRoutes(db));
+app.use("/api/quizzes/results", quizResultsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
