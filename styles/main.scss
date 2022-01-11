@@ -8,7 +8,9 @@ body {
   background: #FFFFFF;
 }
 
-
+.nav-item {
+  text-decoration: none;
+}
 
 .public_quizzes {
   background: #FAC7D9;
@@ -16,7 +18,6 @@ body {
   margin-bottom: 5%;
   height: 612px;
   width: 469px;
-  margin-top: 50px;
 }
 
 table {
