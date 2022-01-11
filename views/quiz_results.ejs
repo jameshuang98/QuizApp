@@ -20,22 +20,14 @@
 
   <!-- fonts for CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
-  <nav>
-    <span class = "bold">LOGO</span>
-    <div class = "links_header">
-      <a>Quizzes</a>
-      <a>Subjects</a>
-      <a>Create</a>
-      <a>Explore</a>
-    </div>
-    <a> Login</a>
-  </nav>
+  <%- include('partials/_header') %>
+
   <main class="container">
     <h3><b>My Results</b></h3>
     <div class="quiz_results">
