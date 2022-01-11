@@ -27,23 +27,7 @@
 </head>
 
 <body>
-  <!-- Top nav bar (fixed) -->
-  <nav>
-    <span id="logo">LOGO</span>
-    <div class = "links_header">
-      <a>Quizzes</a>
-      <a>Subjects</a>
-      <a>Create</a>
-      <a>Explore</a>
-    </div>
-    <div>
-      <a class="logged_in">Logged in as User</a>
-      <a>Log Out</a>
-    </div>
-
-
-  </nav>
-
+  <%- include('partials/_header') %>
 
   <main class="container">
     <div class="quiz_title"><%= quiz_name %> </div>
