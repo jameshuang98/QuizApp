@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>My Results</title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
   <link rel="stylesheet" href="/styles/quiz_results.css" type="text/css" />
-
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -26,8 +25,6 @@
 
 </head>
 
-
-
 <body>
   <nav>
     <span class = "bold">LOGO</span>
@@ -37,41 +34,34 @@
       <a>Create</a>
       <a>Explore</a>
     </div>
-    <!-- <a>Logged in as User</a>
-    <a>Log Out</a> -->
-    <a> login</a>
+    <a> Login</a>
   </nav>
-<!--
-  <h1>Have fun! 🥔</h1> -->
-  <!-- <div class = "create_new_quiz"> -->
-    <!-- <p>Create a new quiz</p> -->
-    <!-- <form>
-      <label>Quiz</label>
-      <input name = "Quiz name" required/>
-    </form> -->
-
-  <!-- </div> -->
-
-  <div class = "quiz_results">
-    <table>
-      <thead>
-        <tr>
-          <th scope="col:">Question</th>
-          <th scope="col">Answer</th>
-          <th scope="col">Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for(let item of results) { %>
+  <main class="container">
+    <h3><b>My Results</b></h3>
+    <div class="quiz_results">
+      <table>
+        <thead>
           <tr>
-            <td><%= item.question %><td>
-            <td><%= item.answer %></td>
-            <td><%= item.correct %></td>
+            <th scope="col">Question</th>
+            <th scope="col">Answer</th>
+            <th scope="col">Score</th>
           </tr>
-        <% } %>
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          <% for(let item of results) { %>
+            <tr>
+              <td><%= item.question %></td>
+              <td><%= item.answer %></td>
+              <td><%= item.score %>/1</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <div class="total">
+        <h3>Total: <%= results[0].total %>/4</h3>
+      </div>
+    </div>
+</main>
 </body>
 
 </html>
