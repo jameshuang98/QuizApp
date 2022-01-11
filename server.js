@@ -43,8 +43,8 @@ const quizResultsRoutes = require("./routes/quiz_results")
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/quizzes/new", quizzesRoutes(db));
-app.use("/api/quizzes/results", quizResultsRoutes(db));
+app.use("/quizzes", quizzesRoutes(db));
+app.use("/quizzes/results", quizResultsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
