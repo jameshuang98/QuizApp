@@ -9,24 +9,18 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/api/quizzes", (req, res) => {
-    let query = `SELECT quizzes.name, CONCAT((cast(score as float) / cast(count(quizzes.id) as float)) * 100, '%') as top_score
-    FROM attempts
-    JOIN attempted_answers ON attempts.id = attempt_id
-    JOIN answers ON answer_id = answers.id
-    JOIN quizzes ON attempts.quiz_id = quizzes.id
-    JOIN users ON attempts.user_id = users.id
-    WHERE public = true
-    GROUP BY quizzes.name, attempts.score, users.name
-    ORDER BY score DESC
-    LIMIT 1;`
+  router.get("/new", (req, res) => {
+    let query = `SELECT name FROM quizzes
+    WHERE quizzes.public IS true;
+    `
     console.log(query);
     db.query(query)
       .then(data => {
         const quizzes = data.rows; //iterate over quizzes, make data structure for my ejs, then pass as a templatevars into ejs
-        const templateVars = {quizzes};
+        // const templateVars = {quizzes};
         console.log(quizzes);
-        res.render("new_quiz", templateVars);
+        // res.render("index", templateVars);
+        res.json({quizzes});
       })
       .catch(err => {
         res
@@ -36,3 +30,4 @@ module.exports = (db) => {
   });
   return router;
 };
+
