@@ -36,29 +36,32 @@
     </div>
     <a> Login</a>
   </nav>
-  <div class = "quiz_results public_quizzes">
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">Question</th>
-          <th scope="col">Answer</th>
-          <th scope="col">Score</th>
-        </tr>
-      </thead>
-      <tbody>        
-        <% for(let item of results) { %>
+  <main class="container">
+    <h3><b>My Results</b></h3>
+    <div class="quiz_results">
+      <table>
+        <thead>
           <tr>
-            <td><%= item.question %></td>
-            <td><%= item.answer %></td>
-            <td><%= item.score %>/1</td>
+            <th scope="col">Question</th>
+            <th scope="col">Answer</th>
+            <th scope="col">Score</th>
           </tr>
-        <% } %>
-      </tbody>
-    </table>
-    <div class="total">
-      <h3>Total: <%= results[0].total %>/4</h3>
+        </thead>
+        <tbody>        
+          <% for(let item of results) { %>
+            <tr>
+              <td><%= item.question %></td>
+              <td><%= item.answer %></td>
+              <td><%= item.score %>/1</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <div class="total">
+        <h3>Total: <%= results[0].total %>/4</h3>
+      </div>
     </div>
-  </div>
+</main>
 </body>
 
 </html>
