@@ -26,7 +26,7 @@ module.exports = (db) => {
       .then(data => {
         const quizzes = data.rows;
         console.log(quizzes);
-        templateVars = {quizzes}
+        const templateVars = {quizzes}
         res.render("index", templateVars);
       })
       .catch(err => {
