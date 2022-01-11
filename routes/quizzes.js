@@ -11,16 +11,14 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/new", (req, res) => {
     let query = `SELECT name FROM quizzes
-    WHERE quizzes.public IS true;
-    `
+    WHERE quizzes.public IS true;`;
     console.log(query);
     db.query(query)
       .then(data => {
-        const quizzes = data.rows; //iterate over quizzes, make data structure for my ejs, then pass as a templatevars into ejs
-        // const templateVars = {quizzes};
+        const quizzes = data.rows;
         console.log(quizzes);
-        // res.render("index", templateVars);
-        res.json({quizzes});
+        templateVars = {quizzes}
+        res.render("index", templateVars);
       })
       .catch(err => {
         res
