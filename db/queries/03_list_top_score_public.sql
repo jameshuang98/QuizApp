@@ -1,4 +1,3 @@
--- SELECT count() --> Needs to complete
 SELECT quizzes.name, CONCAT((cast(score as float) / cast(count(quizzes.id) as float)) * 100, '%') as top_score
 FROM attempts
 JOIN attempted_answers ON attempts.id = attempt_id

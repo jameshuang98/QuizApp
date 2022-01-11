@@ -40,12 +40,14 @@ const widgetsRoutes = require("./routes/widgets");
 const quizzesRoutes = require("./routes/quizzes");
 const quizRoutes = require("./routes/quiz");
 
+const quizResultsRoutes = require("./routes/quiz_results")
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/quizzes", quizzesRoutes(db));
 app.use("/api/quiz", quizRoutes(db));
+app.use("/quizzes", quizzesRoutes(db));
+app.use("/quizzes/results", quizResultsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -56,9 +58,9 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/quizzes/new", (req, res) => {
-  res.render("new_quiz");
-});
+// app.get("/quizzes/new", (req, res) => {
+//   res.render("new_quiz");
+// });
 
 // Helper function used on quiz page to convert question and answer indices to letters
 app.locals.indexToLetter = function(index) {
