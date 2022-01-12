@@ -3,9 +3,9 @@ VALUES ('David Smith', 'david.smith@gmail.com','password','2018-02-12T08:00:00.0
 ('Jessica John', 'jess.john@gmail.com','password','2018-02-12T08:13:20.000Z'),
 ('Steven Bob', 'steven.bob@gmail.com','password','2018-02-12T08:13:20.000Z');
 
-INSERT INTO quizzes (user_id, name, created_at, subject, difficulty, public)
-VALUES (1, 'HTTP QUIZ', '2018-02-12T08:13:20.000Z','Web Development','easy',true),
-(1, 'Test Quiz', '2018-02-12T08:13:20.000Z','Web Development','easy',false);
+INSERT INTO quizzes (user_id, name, subject, difficulty, public)
+VALUES (1, 'HTTP QUIZ','Web Development','easy',true),
+(1, 'Test Quiz','Web Development','easy',false);
 
 
 INSERT INTO questions (quiz_id, question)
