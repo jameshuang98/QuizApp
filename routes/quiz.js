@@ -21,9 +21,7 @@ const getQuizFromDB = async (id, db) => {
   const data = await db.query(query, [id])
 
   const questionData = data.rows;
-  // const user_id = req.session.user_id;
   const templateVars = {
-    // user: user_id,
     quiz_name: questionData[0].quiz_name,
     quiz_id: questionData[0].quiz_id
   }
@@ -61,18 +59,15 @@ const getQuizFromDB = async (id, db) => {
 const getScore = async (db, submissions) => {
   let answers_query = `SELECT * FROM answers WHERE correct = true;`
   let score = 0;
-  console.log('submissions in getScore', submissions)
-  let data = await db.query(answers_query)
+  let data = await db.query(answers_query);
   let correct_answers_id = [];
-  correct_answers_id = data.rows.map(a => a.id)
+  correct_answers_id = data.rows.map(a => a.id);
   submissions.forEach((s, index) => {
     if (s[1] == correct_answers_id[index]) {
-      // console.log('does this work :)')
       score++;
     }
   });
   return score;
-
 };
 
 module.exports = (db) => {
@@ -93,20 +88,12 @@ module.exports = (db) => {
 
 
   router.post("/:id", (req, res) => {
-    console.log('req.body', req.body)
+    // console.log('req.body', req.body)
 
     // Converting attempted answers object (req.body) into an array of arrays
     let submissions = Object.keys(req.body).map((key) => [key, req.body[key]]);
 
     // console.log('submissions', submissions)
-
-    // db.query(submissions_query)
-    //   .then(() => {
-    //     console.log('success for submissions_query')
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   });
 
     const user_id = req.session.user_id;
     const id = req.params.id;
@@ -115,8 +102,8 @@ module.exports = (db) => {
       .then(score => {
         getQuizFromDB(id, db)
           .then(templateVars => {
-            let attempts_query = `INSERT INTO attempts (user_id, quiz_id, score)
-            VALUES (${user_id}, ${templateVars.quiz_id}, ${score})
+            let attempts_query = `INSERT INTO attempts (user_id, quiz_id, attempted_at, score)
+            VALUES (${user_id}, ${templateVars.quiz_id}, CURRENT_TIMESTAMP, ${score})
             RETURNING id;`
             db.query(attempts_query)
               .then((attempts) => {
@@ -128,7 +115,6 @@ module.exports = (db) => {
                   VALUES
                   `;
                 submissions.forEach((attempt) => {
-                  // submissions_query+= ` (${attempt[0]}, ${attempt[1]}),`
                   submissions_query += ` (${attempt_id}, ${attempt[1]}),`
                 });
                 submissions_query = submissions_query.substring(0, submissions_query.length - 1);
@@ -149,19 +135,7 @@ module.exports = (db) => {
       .catch(err => {
         console.log(err);
       });
-
-
-
-    // getQuizFromDB(id, db)
-    //   .then(templateVars => {
-    //     let answers_query = `INSERT INTO attempted_answers (attempt_id, answer_id)
-    //     VALUES`;
-    //     for (const quiz)
-    //     res.render('quiz/results/:id');
-    //   })
-
     res.send('success')
   });
-
   return router;
 };
