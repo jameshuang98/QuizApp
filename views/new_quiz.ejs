@@ -28,78 +28,89 @@
 
 <body>
   <%- include('partials/_header') %>
-
+  <% if(user) { %>
   <div class = "create_new_quiz">
     <p><b>Create a new quiz</b></p>
-    <form class = "quiz_info_form">
-      <label>Quiz</label>
-      <input name = "Quiz name" required/>
-      <label>Subject</label>
-      <input name = "Subject" required/>
-      <label>Difficulty Level</label>
-      <input name = "Difficulty" required/>
+    <form method = "POST" action = "/api/quizzes/new">
+      <div class = "quiz_info_form">
+        <label>Quiz</label>
+        <input name = "quizname" required/>
+        <label>Subject</label>
+        <input name = "Subject" required/>
+        <label>Difficulty Level</label>
+        <input name = "Difficulty" required/>
+      </div>
+
+      <div class = "quiz_question_container">
+        <div class = "question_box">
+
+          <div class = "question_1">
+            <label>Question 1</label>
+            <input name = "question" required/>
+            <div class = "question_options">
+              <label>A</label>
+              <input name = "answers1" required/>
+              <label>B</label>
+              <input name = "answers1" required/>
+              <label>C</label>
+              <input name = "answers1" required/>
+            </div>
+          </div>
+
+          <div class = "question_1">
+            <label>Question 2</label>
+            <input name = "question" required/>
+            <div class = "question_options">
+              <label>A</label>
+              <input name = "answers2" required/>
+              <label>B</label>
+              <input name = "answers2" required/>
+              <label>C</label>
+              <input name = "answers2" required/>
+            </div>
+          </div>
+
+          <div class = "question_1">
+            <label>Question 3</label>
+            <input name = "question" required/>
+            <div class = "question_options">
+              <label>A</label>
+              <input name = "answers3" required/>
+              <label>B</label>
+              <input name = "answers3" required/>
+              <label>C</label>
+              <input name = "answers3" required/>
+            </div>
+          </div>
+
+          <div class = "question_1">
+            <label>Question 4</label>
+            <input name = "question" required/>
+            <div class = "question_options">
+              <label>A</label>
+              <input name = "answers4" required/>
+              <label>B</label>
+              <input name = "answers4" required/>
+              <label>C</label>
+              <input name = "answers4" required/>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <button class = "create_btn" type="submit" >Create</button>
     </form>
 
-    <div class = "quiz_question_container">
-      <form class = "question_1">
-        <div class = "question_box"> 
-          <label>Question 1</label>
-          <input name = "Question 1" required/>
-        </div>
-        <div class = "question_options">
-          <label>A</label>
-          <input name = "A" required/>
-          <label>B</label>
-          <input name = "B" required/>
-          <label>C</label>
-          <input name = "C" required/>
-        </div>
-      </form>
 
-      <form class = "question_1">
-        <label>Question 2</label>
-        <input name = "Question 2" required/>
-        <div class = "question_options">
-          <label>A</label>
-          <input name = "A" required/>
-          <label>B</label>
-          <input name = "B" required/>
-          <label>C</label>
-          <input name = "C" required/>
-        </div>
-      </form>
-
-      <form class = "question_1">
-        <label>Question 3</label>
-        <input name = "Question 3" required/>
-        <div class = "question_options">
-          <label>A</label>
-          <input name = "A" required/>
-          <label>B</label>
-          <input name = "B" required/>
-          <label>C</label>
-          <input name = "C" required/>
-        </div>
-      </form>
-
-      <form class = "question_1">
-        <label>Question 4</label>
-        <input name = "Question 4" required/>
-        <div class = "question_options">
-          <label>A</label>
-          <input name = "A" required/>
-          <label>B</label>
-          <input name = "B" required/>
-          <label>C</label>
-          <input name = "C" required/>
-        </div>
-      </form>
-
-      <button class = "create_btn">Create</button>
 
 
 
   </div>
+
+  <% } else { %>
+    <p>Please login to create a quiz</p>
+
+    <% } %>
 </body>
 
 </html>

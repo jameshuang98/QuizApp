@@ -1,29 +1,25 @@
-/*
- * All routes for quizzes are defined here
- * Since this file is loaded in server.js into api/widgets,
- *   these routes are mounted onto /widgets
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
-//comeback to work on
-
 const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  console.log("hello");
-  router.get("/new", (req, res) => {
-    let query = ``;
-    console.log(query);
-    db.query(query)
+  router.get("/:user_id", (req, res) => {
+    const id = req.params.user_id;
+    let query = `SELECT name, id FROM quizzes
+    WHERE quizzes.public IS false
+    AND quizzes.user_id = $1`;
+    // console.log(query);
+    db.query(query, [id])
       .then(data => {
         const quizzes = data.rows;
+        console.log('quizzes', quizzes);
+        
+        // check if user logged in
         const user_id = req.session.user_id;
         const templateVars = {
           user: user_id,
           quizzes: quizzes
         }
-        res.render("new_quiz", templateVars);
+        res.render("profile", templateVars);
       })
       .catch(err => {
         res

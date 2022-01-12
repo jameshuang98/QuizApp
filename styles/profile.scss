@@ -1,0 +1,42 @@
+.profile_container {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  column-gap: 10%;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  width: 75%;
+}
+
+.start_quiz {
+  text-decoration: none;
+}
+
+.private_quizzes {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  background-color: #C7E4FA;
+}
+
+.fa-toggle-off {
+  font-size: 25px;
+}
+
+#hide {
+  display: none;
+}
+
+.fa-toggle-on {
+  font-size: 25px;
+  display: none;
+}
