@@ -51,6 +51,8 @@ const profileRoutes = require("./routes/profile");
 const loadPublic = require("./routes/load_public");
 // const search = require("./routes/search");
 const quizRoutes = require("./routes/quiz");
+const quizNewRoutes = require("./routes/create_new");
+const quizNewPostRoutes = require("./routes/create_new_post");
 const { cookie } = require("express/lib/response");
 
 // Mount all resource routes
@@ -61,6 +63,8 @@ app.use("/api/quizzes", quizzesRoutes(db));
 app.use("/api/results", quizResultsRoutes(db));
 // app.use("/api/quizzes/search", search(db));
 app.use("/api/quiz", quizRoutes(db));
+app.use("/api/quizzes", quizNewRoutes(db));
+app.use("/api/quizzes", quizNewPostRoutes(db));
 app.use("/api/profile", profileRoutes(db));
 app.use("/api/public", loadPublic(db)); // sends JSON
 // Note: mount other resources here, using the same pattern above
