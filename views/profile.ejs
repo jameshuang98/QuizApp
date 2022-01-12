@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/profile.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -26,29 +27,53 @@
 <body>
   <%- include('partials/_header') %>
   
-  <div class = "public_quizzes">
-    <table>
-      <thead>
-      <tr>
-        <th>My Quizzes</th>
-        <th>Top Score</th>
-        <th>Start Quiz</th>
-      </tr>
-    </thead>
-    <tbody>
-    <%  for(let quiz of quizzes) { %>
-      <tr>
-        <td><%= quiz.name %></td>
-        <td><%= quiz.top_score %></td>
-        <td><a class="start_quiz" href="/api/quiz/<%= quiz.id %>">Start Quiz</td>
-    <% } %>
-      </tr>
-    </tbody>
-    </table>
+  <main class="profile_container">
 
-  </div>
+    <div class = "public_quizzes" id="list_public">
+      <h3 class="title">Public Quizzes</h3>
+      <table>
+        <thead>
+        <tr>
+          <th>Quiz Name</th>
+          <th>Top Score</th>
+          <th>Start Quiz</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>http quiz</td>
+          </tr>
+      </tbody>
+      </table>
 
+    </div>
 
+    <div class = "public_quizzes private_quizzes">
+      <h3 class="title">My Quizzes</h3>
+      <table>
+        <thead>
+        <tr>
+          <th>Quiz Name</th>
+          <th>Top Score</th>
+          <th>Start Quiz</th>
+          <th>Public</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%  for(let quiz of quizzes) { %>
+        <tr>
+          <td><%= quiz.name %></td>
+          <td><%= quiz.top_score %></td>
+          <td><a class="start_quiz" href="/api/quiz/<%= quiz.id %>">Start Quiz</td>
+          <td><i class="fas fa-toggle-off" id="public"></i><i class="fas fa-toggle-on" id="hide"></i></td>
+      <% } %>
+        </tr>
+      </tbody>
+      </table>
+
+    </div>
+
+  </main>
 
 </body>
 
