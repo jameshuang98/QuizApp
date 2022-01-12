@@ -26,7 +26,13 @@ module.exports = (db) => {
       .then(data => {
         const quizzes = data.rows;
         console.log(quizzes);
-        const templateVars = {quizzes}
+        
+        // check if user logged in
+        const user_id = req.session.user_id;
+        const templateVars = {
+          user: user_id,
+          quizzes: quizzes
+        }
         res.render("index", templateVars);
       })
       .catch(err => {

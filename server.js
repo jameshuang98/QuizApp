@@ -7,6 +7,8 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const cookieSession = require("cookie-session");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -18,6 +20,12 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['lighthouse', 'midterm'],
+  })
+);
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -39,8 +47,10 @@ const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const quizzesRoutes = require("./routes/quizzes");
 const quizResultsRoutes = require("./routes/quiz_results");
+const profileRoutes = require("./routes/profile")
 // const search = require("./routes/search");
 const quizRoutes = require("./routes/quiz");
+const { cookie } = require("express/lib/response");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -50,6 +60,7 @@ app.use("/api/quizzes", quizzesRoutes(db));
 app.use("/api/results", quizResultsRoutes(db));
 // app.use("/api/quizzes/search", search(db));
 app.use("/api/quiz", quizRoutes(db));
+app.use("/api/profile", profileRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -57,8 +68,26 @@ app.use("/api/quiz", quizRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.redirect("/api/quizzes/public");
 });
+
+app.get('/login/:id', (req, res) => {
+  // cookie-session middleware
+  req.session.user_id = req.params.id;
+
+  // cookie-parser middleware
+  res.cookie('user_id', req.params.id);
+
+  // send the user somewhere
+  res.redirect('/');
+});
+
+// logout
+app.get('/logout', (req, res) => {
+  req.session = null;
+  res.clearCookie("user_id");
+  return res.redirect('/');
+})
 
 // Helper function used on quiz page to convert question and answer indices to letters
 app.locals.indexToLetter = function(index) {
