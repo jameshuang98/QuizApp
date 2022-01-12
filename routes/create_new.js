@@ -12,24 +12,15 @@ const router  = express.Router();
 
 module.exports = (db) => {
   console.log("hello");
-  router.get("/public", (req, res) => {
-    let query = `SELECT quizzes.name, CONCAT((cast(score as float) / cast(count(quizzes.id) as float)) * 100, '%') as top_score
-    FROM attempts
-    JOIN attempted_answers ON attempts.id = attempt_id
-    JOIN answers ON answer_id = answers.id
-    JOIN quizzes ON attempts.quiz_id = quizzes.id
-    JOIN users ON attempts.user_id = users.id
-    WHERE public = true
-    GROUP BY quizzes.name, attempts.score, users.name
-    ORDER BY score DESC
-    LIMIT 1;`;
+  router.get("/new", (req, res) => {
+    let query = ``;
     console.log(query);
     db.query(query)
       .then(data => {
         const quizzes = data.rows;
         console.log(quizzes);
         templateVars = {quizzes}
-        res.render("index", templateVars);
+        res.render("new_quiz", templateVars);
       })
       .catch(err => {
         res
@@ -39,3 +30,4 @@ module.exports = (db) => {
   });
   return router;
 };
+
