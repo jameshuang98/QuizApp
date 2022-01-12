@@ -47,7 +47,8 @@ const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const quizzesRoutes = require("./routes/quizzes");
 const quizResultsRoutes = require("./routes/quiz_results");
-const profileRoutes = require("./routes/profile")
+const profileRoutes = require("./routes/profile");
+const loadPublic = require("./routes/load_public");
 // const search = require("./routes/search");
 const quizRoutes = require("./routes/quiz");
 const quizNewRoutes = require("./routes/create_new");
@@ -65,6 +66,7 @@ app.use("/api/quiz", quizRoutes(db));
 app.use("/api/quizzes", quizNewRoutes(db));
 app.use("/api/quizzes", quizNewPostRoutes(db));
 app.use("/api/profile", profileRoutes(db));
+app.use("/api/public", loadPublic(db)); // sends JSON
 // Note: mount other resources here, using the same pattern above
 
 // Home page
