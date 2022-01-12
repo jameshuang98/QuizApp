@@ -3,20 +3,11 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `SELECT quizzes.name, CONCAT((cast(score as float) / cast(count(quizzes.id) as float)) * 100, '%') as top_score
-    FROM attempts
-    JOIN attempted_answers ON attempts.id = attempt_id
-    JOIN answers ON answer_id = answers.id
-    JOIN quizzes ON attempts.quiz_id = quizzes.id
-    JOIN users ON attempts.user_id = users.id
-    WHERE public = true
-    GROUP BY quizzes.name, attempts.score, users.name
-    ORDER BY score DESC
-    LIMIT 1`;
+    let query = `SELECT name FROM quizzes WHERE public = true`;
     db.query(query)
       .then(data => {
         const quizzes = data.rows;
-        // console.log('quizzes', quizzes);
+        console.log('quizzes.quizzes', quizzes.quizzes);
         res.json({ quizzes });
       })
       .catch(err => {

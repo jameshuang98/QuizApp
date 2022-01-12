@@ -12,7 +12,7 @@ $(() => {
 const turnPublic = function() {
   $.get("/api/public")
     .then(data => {
-      // console.log('data', data)
+      console.log('data', data)
       renderQuizzes(data);
     });
 

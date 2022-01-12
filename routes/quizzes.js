@@ -11,23 +11,21 @@ const router  = express.Router();
 module.exports = (db) => {
   console.log("hello");
   router.get("/public", (req, res) => {
-    let query = `SELECT * FROM quizzes
+    let query = `SELECT name FROM quizzes WHERE public = true
     `;
     console.log(query);
     db.query(query)
       .then(data => {
         const quizzes = data.rows;
-        // console.log(quizzes);
+        console.log(quizzes);
         
-        // // check if user logged in
-        // const user_id = req.session.user_id;
-        // const templateVars = {
-        //   user: user_id,
-        //   quizzes: quizzes
-        // }
-        // res.render("index", templateVars);
-
-        res.json({ quizzes })
+        // check if user logged in
+        const user_id = req.session.user_id;
+        const templateVars = {
+          user: user_id,
+          quizzes: quizzes
+        }
+        res.render("index", templateVars);
       })
       .catch(err => {
         res
