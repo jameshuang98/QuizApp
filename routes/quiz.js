@@ -21,7 +21,9 @@ const getQuizFromDB = async (id, db) => {
   const data = await db.query(query, [id])
 
   const questionData = data.rows;
+  // const user_id = req.session.user_id;
   const templateVars = {
+    // user: user_id,
     quiz_name: questionData[0].quiz_name,
     quiz_id: questionData[0].quiz_id
   }
@@ -66,12 +68,13 @@ const getScore = (db, submissions) => {
         let correct_answers_id = [];
         correct_answers_id = data.rows.map(a => a.id)
         submissions.forEach((s, index) => {
-          if (s[1] === correct_answers_id[index]) {
+          if (s[1] == correct_answers_id[index]) {
+            // console.log('does this work :)')
             score++;
           }
         })
-        console.log('correct_answers', correct_answers_id)
-        console.log('score', score);
+        // console.log('correct_answers', correct_answers_id)
+        // console.log('score', score);
         return score;
       })
       .catch(err => {
@@ -84,6 +87,8 @@ module.exports = (db) => {
     const id = req.params.id
     getQuizFromDB(id, db)
       .then(templateVars => {
+        const user_id = req.session.user_id;
+        templateVars.user = user_id;
         res.render("quiz", templateVars);
       })
       .catch(err => {
@@ -102,12 +107,12 @@ module.exports = (db) => {
 
     // console.log('submissions', submissions)
     let submissions_query =
-      `INSERT INTO attempted_answers (attempt_id, answer_id)
+      `INSERT INTO attempted_answers (answer_id)
     VALUES
     `;
 
     submissions.forEach((attempt) => {
-      submissions_query+= ` (1, ${attempt[1]}),`
+      submissions_query+= ` (${attempt[1]}),`
     });
     submissions_query = submissions_query.substring(0, submissions_query.length - 1);
     submissions_query += ';'
@@ -122,15 +127,14 @@ module.exports = (db) => {
 
     let score = 0;
     // Calculate score from submissions
-    getScore(db, submissions)
+    score = getScore(db, submissions)
     //   .then(num => {
     //     score = num;
     //   })
     //   .catch(err => {
     //     console.log(err);
     //   });
-      console.log('scoreeee', score)
-
+    console.log('score', score)
 
     // const id = req.params.id;
     // getQuizFromDB(id, db)
@@ -142,7 +146,6 @@ module.exports = (db) => {
     //   })
 
     res.send('success')
-
   });
 
   return router;
