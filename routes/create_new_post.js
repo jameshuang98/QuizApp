@@ -63,6 +63,7 @@ module.exports = (db) => {
             n += 1;
             const ans = 'answers' + n;
             let answerslen = req.body[ans].length;
+            console.log(ans)
             for(let i = 0; i < answerslen; i++){
             db.query(`INSERT INTO answers (question_id, answer)
                 VALUES ($1, $2)

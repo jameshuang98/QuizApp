@@ -18,8 +18,11 @@ module.exports = (db) => {
     db.query(query)
       .then(data => {
         const quizzes = data.rows;
-        console.log(quizzes);
-        templateVars = {quizzes}
+        const user_id = req.session.user_id;
+        const templateVars = {
+          user: user_id,
+          quizzes: quizzes
+        }
         res.render("new_quiz", templateVars);
       })
       .catch(err => {
