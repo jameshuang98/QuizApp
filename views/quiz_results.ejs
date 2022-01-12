@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
   <link rel="stylesheet" href="/styles/quiz_results.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/quiz.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -22,6 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
 
 </head>
 
@@ -29,31 +31,32 @@
   <%- include('partials/_header') %>
 
   <main class="container">
-    <h3><b>My Results</b></h3>
-    <div class="quiz_results">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Question</th>
-            <th scope="col">Answer</th>
-            <th scope="col">Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for(let item of results) { %>
-            <tr>
-              <td><%= item.question %></td>
-              <td><%= item.answer %></td>
-              <td><%= item.score %>/1</td>
-            </tr>
-          <% } %>
-        </tbody>
-      </table>
-      <div class="total">
-        <h3>Total: <%= results[0].total %>/4</h3>
-      </div>
+    <div class="results_title">
+      <div class="quiz_title">My Results: <%= quiz_name %></div>
+        <div class="results_options">
+          <h2 class="score">Total: <%= attempt_score %>/4</h2>
+          <a class="nav-item" href="/api/quiz/<%= quiz_id %>"><button class="try_again" type="try_again">Try Again</button></a>
+        </div>
     </div>
-</main>
+    <section class="all_questions">
+      <form action='/api/quiz/<%= quiz_id %>' method='POST'>
+        <% questions.forEach((item) => {%>
+        <article>
+          <header>
+            <div class="question">
+              <p><%= item.question %></p>
+            </div>
+          </header>
+          <div class="answers">
+            My Answer: <%= item.attempted_answer %>
+            <p><b>Score: <%= item.score %>/1</b></p>
+          </div>
+        </article>
+        <% }) %>
+      </form>
+    </section>
+  </main>
+
 </body>
 
 </html>

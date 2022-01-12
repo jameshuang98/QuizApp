@@ -51,6 +51,7 @@ const getQuizFromDB = async (id, db) => {
             }
           })
         }
+<<<<<<< HEAD
       });
 
       console.log(templateVars);
@@ -63,6 +64,33 @@ module.exports = (db) => {
     const id = req.params.id
     getQuizFromDB(id, db)
       .then(templateVars => {
+=======
+        const questions = [];
+        console.log(questionData)
+
+        // Collecting each unique question in quiz and storing them in an array
+        data.rows.forEach((i) => {
+          if (!questions.includes(i.question)) {
+            questions.push(i.question)
+          }
+        });
+
+        // Looping through questions array and creating an array of answers for each question
+        templateVars.questions = questions.map((i) => {
+          const answers = data.rows.filter((j) => j.question === i);
+          return {
+            question:i,
+            answers:answers.map((i) => {
+              return {
+                text: i.answer,
+                id: i.answer_id
+              }
+            })
+          }
+        });
+
+        console.log(templateVars);
+>>>>>>> master
         res.render("quiz", templateVars);
       })
       .catch(err => {
