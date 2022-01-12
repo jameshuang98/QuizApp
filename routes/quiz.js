@@ -9,6 +9,7 @@ const { text } = require('express');
 const express = require('express');
 const router = express.Router();
 
+// Getting all information for a specific quiz that the user is taking
 const getQuizFromDB = async (id, db) => {
   let query =
     `SELECT quizzes.name as quiz_name, questions.quiz_id, questions.id as question_id, questions.question, answers.answer, answers.id as answer_id
@@ -37,7 +38,6 @@ const getQuizFromDB = async (id, db) => {
   templateVars.questions = questions.map((q) => {
     // Stores info on all answers for a specific question
     const answers = data.rows.filter((i) => i.question === q);
-    // console.log(answers);
     // Each element of the templateVars.questions stores an object containing the question, and an answers object
     // Within that answers object is an array of objects corresponding to the various answers for a given question
     // Each object contains the answer-text and answer-id
@@ -52,10 +52,34 @@ const getQuizFromDB = async (id, db) => {
     }
   });
 
-  console.log(templateVars);
   return templateVars;
+};
 
+// Getting the users score after they submit the quiz
+const getScore = (db, submissions) => {
+  let answers_query = `SELECT * FROM answers WHERE correct = true;`
+    let score = 0;
+    db.query(answers_query)
+      .then(data => {
+        let correct_answers = [];
+        correct_answers = data.rows.map(a => a.answer)
+        console.log('correct_answers', correct_answers)
+
+        submissions.forEach((s, index) => {
+          if (s[1] === correct_answers[index]) {
+            score++;
+          }
+        })
+        console.log('correct_answers', correct_answers)
+        console.log('score', score);
+        return score;
+      })
+      .catch(err => {
+        throw(err);
+      });
 }
+
+
 
 module.exports = (db) => {
   router.get("/:id", (req, res) => {
@@ -73,22 +97,40 @@ module.exports = (db) => {
 
 
   router.post("/:id", (req, res) => {
+    console.log('req.body', req.body)
+
     // Converting attempted answers object (req.body) into an array of arrays
     let submissions = Object.keys(req.body).map((key) => [key, req.body[key]]);
-
-    let attempts_query =
-      `INSERT INTO attempts (user_id, quiz_id, score)
+    console.log('submissions', submissions)
+    let submissions_query =
+      `INSERT INTO attempted_answers (attempt_id, answer_id)
     VALUES
     `;
-    for (const attempt of submissions) {
-      attempts_query += ` (${attempt[1]}, ${attempt[0]}),`
-    };
-    attempts_query = attempts_query.substring(0, attempts_query.length - 1);
-    attempts_query += ';'
+    submissions.forEach((attempt, index) => {
+      submissions_query+= ` (1, ${attempt[1]}),`
+    });
+    submissions_query = submissions_query.substring(0, submissions_query.length - 1);
+    submissions_query += ';'
+    console.log(submissions_query);
 
-    // db.query(attempts_query)
+    db.query(submissions_query)
+      .then(() => {
+        console.log('success')
+      })
+      .catch(err => {
+        console.log(err)
+      });
+
+
+    // Calculate score from submissions
+    // getScore(db, submissions)
+    //   .then(
+
+    //   })
     //   .catch(err => {
-    //     console.log(err)
+    //     res
+    //       .status(500)
+    //       .json({ error: err.message });
     //   });
 
 
@@ -108,7 +150,7 @@ module.exports = (db) => {
 
     //option 1 : send json and receive json and use jquery to see results
     //option 2: redirect to a new page results
-    console.log(req.body)
+
     res.send('success')
 
   });
