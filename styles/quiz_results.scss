@@ -1,24 +1,47 @@
-.container {
+.results_title {
   display: flex;
-  flex-direction: column;
-  width: 80%;
-  height: 100%;
-  justify-content: center;
-  margin: auto;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.quiz_results {
+.results_options {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background: #FAC7D9;
-  padding-left: 5%;
-  margin-top: 10%;
-  margin-bottom: 5%;
-  padding-top: 1em;
-  height: 70vh;
-  width: 70vw;
+  padding-right: 2em;
 }
+
+.score {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.try_again {
+  display:block;
+  text-align: center;
+  margin: auto;
+  margin-bottom:1em;
+  width: 160px;
+  height: 70px;
+  border: none;
+  outline: none;
+  background: #2f2f2f;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 35px;
+  text-align: center;
+  box-shadow: 0 6px 20px -5px rgba(0,0,0,0.4);
+  cursor: pointer;
+}
+
+.question { // take out if dont need
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 5%;
+}
+
 
 .total {
   display: flex;

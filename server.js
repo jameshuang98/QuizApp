@@ -47,7 +47,7 @@ const quizRoutes = require("./routes/quiz");
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/quizzes", quizzesRoutes(db));
-app.use("/api/quizzes/results", quizResultsRoutes(db));
+app.use("/api/results", quizResultsRoutes(db));
 // app.use("/api/quizzes/search", search(db));
 app.use("/api/quiz", quizRoutes(db));
 // Note: mount other resources here, using the same pattern above
