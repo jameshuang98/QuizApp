@@ -20,7 +20,6 @@ const getQuizFromDB = async (id, db) => {
     ORDER BY questions.id;`;
   const data = await db.query(query, [id])
 
-  // console.log(data)
   const questionData = data.rows;
   const templateVars = {
     quiz_name: questionData[0].quiz_name,
@@ -34,11 +33,12 @@ const getQuizFromDB = async (id, db) => {
       questions.push(q.question)
     }
   });
+
   // Looping through questions array and creating an array of answers from data.rows for each question
   templateVars.questions = questions.map((q) => {
     // Stores info on all answers for a specific question
     const answers = data.rows.filter((i) => i.question === q);
-    // Each element of the templateVars.questions stores an object containing the question, and an answers object
+    // Each element of the templateVars.questions stores an object containing the question and an answers object
     // Within that answers object is an array of objects corresponding to the various answers for a given question
     // Each object contains the answer-text and answer-id
     return {
@@ -59,27 +59,25 @@ const getQuizFromDB = async (id, db) => {
 const getScore = (db, submissions) => {
   let answers_query = `SELECT * FROM answers WHERE correct = true;`
     let score = 0;
+    console.log('submissions in getScore', submissions)
     db.query(answers_query)
       .then(data => {
-        let correct_answers = [];
-        correct_answers = data.rows.map(a => a.answer)
-        console.log('correct_answers', correct_answers)
-
+        // console.log('data.rows', data.rows)
+        let correct_answers_id = [];
+        correct_answers_id = data.rows.map(a => a.id)
         submissions.forEach((s, index) => {
-          if (s[1] === correct_answers[index]) {
+          if (s[1] === correct_answers_id[index]) {
             score++;
           }
         })
-        console.log('correct_answers', correct_answers)
+        console.log('correct_answers', correct_answers_id)
         console.log('score', score);
         return score;
       })
       .catch(err => {
         throw(err);
       });
-}
-
-
+};
 
 module.exports = (db) => {
   router.get("/:id", (req, res) => {
@@ -101,38 +99,37 @@ module.exports = (db) => {
 
     // Converting attempted answers object (req.body) into an array of arrays
     let submissions = Object.keys(req.body).map((key) => [key, req.body[key]]);
-    console.log('submissions', submissions)
+
+    // console.log('submissions', submissions)
     let submissions_query =
       `INSERT INTO attempted_answers (attempt_id, answer_id)
     VALUES
     `;
-    submissions.forEach((attempt, index) => {
+
+    submissions.forEach((attempt) => {
       submissions_query+= ` (1, ${attempt[1]}),`
     });
     submissions_query = submissions_query.substring(0, submissions_query.length - 1);
     submissions_query += ';'
-    console.log(submissions_query);
 
     db.query(submissions_query)
       .then(() => {
-        console.log('success')
+        console.log('success for submissions_query')
       })
       .catch(err => {
         console.log(err)
       });
 
-
+    let score = 0;
     // Calculate score from submissions
-    // getScore(db, submissions)
-    //   .then(
-
+    getScore(db, submissions)
+    //   .then(num => {
+    //     score = num;
     //   })
     //   .catch(err => {
-    //     res
-    //       .status(500)
-    //       .json({ error: err.message });
+    //     console.log(err);
     //   });
-
+      console.log('scoreeee', score)
 
 
     // const id = req.params.id;
@@ -143,13 +140,6 @@ module.exports = (db) => {
     //     for (const quiz)
     //     res.render('quiz/results/:id');
     //   })
-
-    // fetch answers from database using quiz_id
-    // loop over submitted answers and check if theyre correct
-    // return results
-
-    //option 1 : send json and receive json and use jquery to see results
-    //option 2: redirect to a new page results
 
     res.send('success')
 
