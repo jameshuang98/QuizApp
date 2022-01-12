@@ -7,7 +7,7 @@
 
 const { text } = require('express');
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 const getQuizFromDB = async (id, db) => {
   let query =
@@ -19,43 +19,41 @@ const getQuizFromDB = async (id, db) => {
     ORDER BY questions.id;`;
   const data = await db.query(query, [id])
 
-      // console.log(data)
-      const questionData = data.rows;
-      const templateVars = {
-        quiz_name: questionData[0].quiz_name,
-        quiz_id: questionData[0].quiz_id
-      }
-      const questions = [];
-      // console.log(questionData)
+  // console.log(data)
+  const questionData = data.rows;
+  const templateVars = {
+    quiz_name: questionData[0].quiz_name,
+    quiz_id: questionData[0].quiz_id
+  }
+  const questions = [];
 
-      // Collecting each unique question in quiz and storing them in an array
-      data.rows.forEach((q) => {
-        if (!questions.includes(q.question)) {
-          questions.push(q.question)
-        }
-      });
-      // Looping through questions array and creating an array of answers from data.rows for each question
-      templateVars.questions = questions.map((q) => {
-        // Stores info on all answers for a specific question
-        const answers = data.rows.filter((i) => i.question === q);
-        // console.log(answers);
-        // Each element of the templateVars.questions stores an object containing the question, and an answers object
-        // Within that answers object is an array of objects corresponding to the various answers for a given question
-        // Each object contains the answer-text and answer-id
+  // Collecting each unique question in quiz and storing them in an array
+  data.rows.forEach((q) => {
+    if (!questions.includes(q.question)) {
+      questions.push(q.question)
+    }
+  });
+  // Looping through questions array and creating an array of answers from data.rows for each question
+  templateVars.questions = questions.map((q) => {
+    // Stores info on all answers for a specific question
+    const answers = data.rows.filter((i) => i.question === q);
+    // console.log(answers);
+    // Each element of the templateVars.questions stores an object containing the question, and an answers object
+    // Within that answers object is an array of objects corresponding to the various answers for a given question
+    // Each object contains the answer-text and answer-id
+    return {
+      question: q,
+      answers: answers.map((a) => {
         return {
-          question:q,
-          answers:answers.map((a) => {
-            return {
-              text: a.answer,
-              id: a.answer_id
-            }
-          })
+          text: a.answer,
+          id: a.answer_id
         }
-<<<<<<< HEAD
-      });
+      })
+    }
+  });
 
-      console.log(templateVars);
-      return templateVars;
+  console.log(templateVars);
+  return templateVars;
 
 }
 
@@ -64,33 +62,6 @@ module.exports = (db) => {
     const id = req.params.id
     getQuizFromDB(id, db)
       .then(templateVars => {
-=======
-        const questions = [];
-        console.log(questionData)
-
-        // Collecting each unique question in quiz and storing them in an array
-        data.rows.forEach((i) => {
-          if (!questions.includes(i.question)) {
-            questions.push(i.question)
-          }
-        });
-
-        // Looping through questions array and creating an array of answers for each question
-        templateVars.questions = questions.map((i) => {
-          const answers = data.rows.filter((j) => j.question === i);
-          return {
-            question:i,
-            answers:answers.map((i) => {
-              return {
-                text: i.answer,
-                id: i.answer_id
-              }
-            })
-          }
-        });
-
-        console.log(templateVars);
->>>>>>> master
         res.render("quiz", templateVars);
       })
       .catch(err => {
@@ -98,7 +69,7 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
-    });
+  });
 
 
   router.post("/:id", (req, res) => {
@@ -106,28 +77,29 @@ module.exports = (db) => {
     let submissions = Object.keys(req.body).map((key) => [key, req.body[key]]);
 
     let attempts_query =
-    `INSERT INTO attempted_answers (attempt_id, answer_id)
+      `INSERT INTO attempts (user_id, quiz_id, score)
     VALUES
     `;
     for (const attempt of submissions) {
       attempts_query += ` (${attempt[1]}, ${attempt[0]}),`
     };
-    attempts_query = attempts_query.substring(0, attempts_query.length -1);
+    attempts_query = attempts_query.substring(0, attempts_query.length - 1);
     attempts_query += ';'
 
     // db.query(attempts_query)
     //   .catch(err => {
-    //     res.status(500)
-    //     .json({ error: err.message });
+    //     console.log(err)
     //   });
 
 
 
-    const id = req.params.id;
+    // const id = req.params.id;
     // getQuizFromDB(id, db)
     //   .then(templateVars => {
-    //     let answers_query = ``;
-    //     res.render('/results/:id', templateVars);
+    //     let answers_query = `INSERT INTO attempted_answers (attempt_id, answer_id)
+    //     VALUES`;
+    //     for (const quiz)
+    //     res.render('quiz/results/:id');
     //   })
 
     // fetch answers from database using quiz_id
