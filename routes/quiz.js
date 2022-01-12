@@ -18,9 +18,7 @@ const getQuizFromDB = async (id, db) => {
     ORDER BY questions.id;`;
   const data = await db.query(query, [id])
   const questionData = data.rows;
-  // const user_id = req.session.user_id;
   const templateVars = {
-    // user: user_id,
     quiz_name: questionData[0].quiz_name,
     quiz_id: questionData[0].quiz_id
   }
@@ -51,28 +49,18 @@ const getQuizFromDB = async (id, db) => {
   return templateVars;
 };
 // Getting the users score after they submit the quiz
-const getScore = (db, submissions) => {
+const getScore = async (db, submissions) => {
   let answers_query = `SELECT * FROM answers WHERE correct = true;`
-    let score = 0;
-    console.log('submissions in getScore', submissions)
-    db.query(answers_query)
-      .then(data => {
-        // console.log('data.rows', data.rows)
-        let correct_answers_id = [];
-        correct_answers_id = data.rows.map(a => a.id)
-        submissions.forEach((s, index) => {
-          if (s[1] == correct_answers_id[index]) {
-            // console.log('does this work :)')
-            score++;
-          }
-        })
-        // console.log('correct_answers', correct_answers_id)
-        // console.log('score', score);
-        return score;
-      })
-      .catch(err => {
-        throw(err);
-      });
+  let score = 0;
+  let data = await db.query(answers_query);
+  let correct_answers_id = [];
+  correct_answers_id = data.rows.map(a => a.id);
+  submissions.forEach((s, index) => {
+    if (s[1] == correct_answers_id[index]) {
+      score++;
+    }
+  });
+  return score;
 };
 module.exports = (db) => {
   router.get("/:id", (req, res) => {
@@ -90,44 +78,52 @@ module.exports = (db) => {
       });
   });
   router.post("/:id", (req, res) => {
-    console.log('req.body', req.body)
+    // console.log('req.body', req.body)
+
     // Converting attempted answers object (req.body) into an array of arrays
     let submissions = Object.keys(req.body).map((key) => [key, req.body[key]]);
     // console.log('submissions', submissions)
-    let submissions_query =
-      `INSERT INTO attempted_answers (answer_id)
-    VALUES
-    `;
-    submissions.forEach((attempt) => {
-      submissions_query+= ` (${attempt[1]}),`
-    });
-    submissions_query = submissions_query.substring(0, submissions_query.length - 1);
-    submissions_query += ';'
-    db.query(submissions_query)
-      .then(() => {
-        console.log('success for submissions_query')
+
+    const user_id = req.session.user_id;
+    const id = req.params.id;
+    // Calculate score from submissions
+    getScore(db, submissions)
+      .then(score => {
+        getQuizFromDB(id, db)
+          .then(templateVars => {
+            let attempts_query = `INSERT INTO attempts (user_id, quiz_id, attempted_at, score)
+            VALUES (${user_id}, ${templateVars.quiz_id}, CURRENT_TIMESTAMP, ${score})
+            RETURNING id;`
+            db.query(attempts_query)
+              .then((attempts) => {
+                console.log('attempts_query successful')
+
+                let attempt_id = attempts.rows[0].id;
+                let submissions_query =
+                  `INSERT INTO attempted_answers (attempt_id, answer_id)
+                  VALUES
+                  `;
+                submissions.forEach((attempt) => {
+                  submissions_query += ` (${attempt_id}, ${attempt[1]}),`
+                });
+                submissions_query = submissions_query.substring(0, submissions_query.length - 1);
+
+                db.query(submissions_query)
+                  .then(() => {
+                    console.log('success for submissions_query')
+                  })
+                  .catch(err => {
+                    console.log(err)
+                  });
+              })
+              .catch(err => {
+                console.log(err)
+              });
+          })
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
       });
-    let score = 0;
-    // Calculate score from submissions
-    score = getScore(db, submissions)
-    //   .then(num => {
-    //     score = num;
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    console.log('score', score)
-    // const id = req.params.id;
-    // getQuizFromDB(id, db)
-    //   .then(templateVars => {
-    //     let answers_query = `INSERT INTO attempted_answers (attempt_id, answer_id)
-    //     VALUES`;
-    //     for (const quiz)
-    //     res.render('quiz/results/:id');
-    //   })
     res.send('success')
   });
   return router;
