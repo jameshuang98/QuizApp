@@ -50,12 +50,9 @@ const quizResultsRoutes = require("./routes/quiz_results");
 const profileRoutes = require("./routes/profile")
 // const search = require("./routes/search");
 const quizRoutes = require("./routes/quiz");
-<<<<<<< HEAD
 const quizNewRoutes = require("./routes/create_new");
 const quizNewPostRoutes = require("./routes/create_new_post");
-=======
 const { cookie } = require("express/lib/response");
->>>>>>> master
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -65,12 +62,9 @@ app.use("/api/quizzes", quizzesRoutes(db));
 app.use("/api/results", quizResultsRoutes(db));
 // app.use("/api/quizzes/search", search(db));
 app.use("/api/quiz", quizRoutes(db));
-<<<<<<< HEAD
 app.use("/api/quizzes", quizNewRoutes(db));
 app.use("/api/quizzes", quizNewPostRoutes(db));
-=======
 app.use("/api/profile", profileRoutes(db));
->>>>>>> master
 // Note: mount other resources here, using the same pattern above
 
 // Home page
