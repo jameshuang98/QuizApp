@@ -29,7 +29,7 @@ module.exports = (db) => {
           quiz_id: questionData[0].quiz_id
         }
         const questions = [];
-        // console.log(questionData)
+        console.log(questionData)
 
         // Collecting each unique question in quiz and storing them in an array
         data.rows.forEach((i) => {
