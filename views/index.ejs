@@ -25,7 +25,7 @@
 </head>
 <body>
   <%- include('partials/_header') %>
-  
+
   <div class = "public_quizzes">
     <table>
       <thead>
@@ -40,7 +40,7 @@
       <tr>
         <td><%= quiz.name %></td>
         <td><%= quiz.top_score %></td>
-        <td>Start Quiz</td>
+        <td><a class="start_quiz" href="/api/quiz/<%= quiz.id %>">Start Quiz</td>
     <% } %>
       </tr>
     </tbody>
