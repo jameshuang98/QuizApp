@@ -5,7 +5,6 @@ module.exports = (db) => {
   router.get("/quiz/:quiz_id/attempt/:attempt_id/", (req, res) => {
     const quiz_id = req.params.quiz_id;
     const attempt_id = req.params.attempt_id;
-    // console.log('req.params', req.params)
     let query = `SELECT attempts.id as attempt_id, attempted_answers.id as attempted_answers_id, attempted_answers.answer_id as attempted_answer, correct, score as total, quizzes.name as quiz_name, questions.quiz_id, questions.id as question_id, questions.question, answers.id as answer_id, answers.answer
     FROM attempts
     JOIN quizzes ON attempts.quiz_id = quizzes.id
@@ -16,7 +15,7 @@ module.exports = (db) => {
     ORDER BY questions.id;
     `;
     db.query(query, [quiz_id, attempt_id])
-      .then(data => { // get quiz specific data and attempt specific data
+      .then(data => {
         const results = data.rows;
         console.log('results', results);
         const templateVars = {
