@@ -60,7 +60,7 @@ const { cookie } = require("express/lib/response");
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/quizzes", quizzesRoutes(db));
-app.use("/api/results", quizResultsRoutes(db));
+app.use("/api/quiz/results", quizResultsRoutes(db));
 // app.use("/api/quizzes/search", search(db));
 app.use("/api/quiz", quizRoutes(db));
 app.use("/api/quizzes", quizNewRoutes(db));
