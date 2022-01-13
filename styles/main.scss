@@ -13,8 +13,24 @@ body {
   color: darkslateblue;
 }
 
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  word-spacing: 0px;
+}
+
 .nav-item {
   text-decoration: none;
+  font-weight: bold;
+  color: darkslateblue;
+  font-size: 18px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .public_quizzes {
@@ -85,4 +101,11 @@ td {
 
 .create_btn{
   margin: 100px;
+}
+
+.links_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 30%;
 }
