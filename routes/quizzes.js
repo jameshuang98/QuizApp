@@ -30,13 +30,13 @@ module.exports = (db) => {
 
         // CONCAT((cast(attempts.score as float) / cast(count(quizzes.id) as float)) * 100, '%')
 
-        let query2 = `SELECT quizzes.name, CONCAT(MAX(score) / 4 * 100, '%') as top_score
+        let query2 = `SELECT quizzes.name, quizzes.id, CONCAT(MAX(score) / 4 * 100, '%') as top_score
         FROM attempts
         RIGHT JOIN quizzes ON attempts.quiz_id = quizzes.id
         WHERE quizzes.id IN (${str})
-        GROUP BY quizzes.name
+        GROUP BY quizzes.name, quizzes.id
         ;`
-        console.log(query2);
+        // console.log(query2);
         db.query(query2)
         .then(data => {
           const user_id = req.session.user_id;
@@ -49,7 +49,7 @@ module.exports = (db) => {
         res.render("index", templateVars);
         })
         // check if user logged in
-        
+
       })
       .catch(err => {
         res

@@ -26,7 +26,7 @@
 </head>
 <body>
   <%- include('partials/_header') %>
-  
+
   <main class="profile_container">
 
     <div class = "public_quizzes" id="list_public">
@@ -70,7 +70,7 @@
             <% } else { %>
               <i class="fas fa-toggle-off hide public-btn publickey-<%= quiz.id %> " data-quiz_id="publickey-<%= quiz.id %>"></i>
               <i class="fas fa-toggle-on private-btn privatekey-<%= quiz.id %>" data-quiz_id="privatekey-<%= quiz.id %>"></i>
-            <% } %>            
+            <% } %>
           </td>
         </tr>
       <% } %>
