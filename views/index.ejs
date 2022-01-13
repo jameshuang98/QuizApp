@@ -41,7 +41,11 @@
     <%  for(let quiz of quizzes) { %>
       <tr>
         <td><%= quiz.name %></td>
-        <td><%= quiz.top_score %></td>
+        <% if (quiz.top_score !== '%') { %>
+          <td><%= quiz.top_score %></td>
+        <% } else { %>
+          <td>N/A</td>
+        <% } %>
         <td><a class="start_quiz" href="/api/quiz/<%= quiz.id %>">Start Quiz</td>
     <% } %>
       </tr>
