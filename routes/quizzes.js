@@ -11,7 +11,7 @@ const router  = express.Router();
 module.exports = (db) => {
   console.log("hello");
   router.get("/public", (req, res) => {
-    let query = `SELECT name FROM quizzes WHERE public = true
+    let query = `SELECT name, id FROM quizzes WHERE public = true;
     `;
     console.log(query);
     db.query(query)
@@ -19,13 +19,37 @@ module.exports = (db) => {
         const quizzes = data.rows;
         console.log(quizzes);
 
-        // check if user logged in
-        const user_id = req.session.user_id;
-        const templateVars = {
+        const arr = [];
+        quizzes.forEach((x) => {
+          arr.push(x.id);
+        })
+
+        const str = arr.toString();
+
+        console.log('str', str)
+
+        // CONCAT((cast(attempts.score as float) / cast(count(quizzes.id) as float)) * 100, '%')
+
+        let query2 = `SELECT quizzes.name, CONCAT(MAX(score) / 4 * 100, '%') as top_score
+        FROM attempts
+        RIGHT JOIN quizzes ON attempts.quiz_id = quizzes.id
+        WHERE quizzes.id IN (${str})
+        GROUP BY quizzes.name
+        ;`
+        console.log(query2);
+        db.query(query2)
+        .then(data => {
+          const user_id = req.session.user_id;
+          const quizzes = data.rows;
+          console.log('quizzes', quizzes)
+          const templateVars = {
           user: user_id,
           quizzes: quizzes
         }
         res.render("index", templateVars);
+        })
+        // check if user logged in
+        
       })
       .catch(err => {
         res
