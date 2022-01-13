@@ -106,6 +106,5 @@ td {
 .links_header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 30%;
+  column-gap: 10%;
 }
