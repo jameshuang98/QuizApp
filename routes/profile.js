@@ -3,10 +3,13 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/:user_id", (req, res) => {
-    const id = req.params.user_id;
-    let query = `SELECT name, id FROM quizzes
-    WHERE quizzes.public IS false
-    AND quizzes.user_id = $1`;
+    const id = req.session.user_id;
+    let query = `
+    SELECT users.id as user_id, users.name, quizzes.name, quizzes.id as quiz_id, quizzes.public
+    FROM quizzes
+    JOIN users ON users.id = quizzes.user_id
+    WHERE quizzes.user_id = $1;
+    `;
     // console.log(query);
     db.query(query, [id])
       .then(data => {
@@ -17,6 +20,7 @@ module.exports = (db) => {
         const user_id = req.session.user_id;
         const templateVars = {
           user: user_id,
+
           quizzes: quizzes
         }
         res.render("profile", templateVars);

@@ -1,2 +1,2 @@
-SELECT name FROM quizzes
+SELECT name, id FROM quizzes
 WHERE quizzes.public IS true;

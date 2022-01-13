@@ -1,14 +1,14 @@
   <nav>
-    <span class = "bold"><i class="fab fa-quora"></i></i></span>
-    <div class = "links_header">
-      <a class="nav-item" href="/api/quizzes/public">Quizzes</a>
-      <a class="nav-item" href="/api/quizzes/new">Create</a>
-      <a class="nav-item" href="/api/profile/1">Profile</a>
+      <div class = "links_header">
+      <a class="nav-item" href="/api/quizzes/public"><i class="fab fa-quora"></a></i>
+        <a class="nav-item nav-link" href="/api/quizzes/public">Home</a>
+        <a class="nav-item nav-link" href="/api/quizzes/new">Create</a>
+        <a class="nav-item nav-link" href="/api/profile/<%= user %>">Profile</a>
       <!-- <a>Explore</a> -->
     </div>
     <% if (user) { %>
       <div>
-        <a class="logged_in">Logged in as: User <%= user %>!</a>
+        <a class="nav-item logged_in">Logged in as: <%= user %>!</a>
         <a class="nav-item" href="/logout">Log Out</a>
       </div>
     <% } else { %>

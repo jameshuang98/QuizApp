@@ -77,6 +77,7 @@ module.exports = (db) => {
       .then(templateVars => {
         const user_id = req.session.user_id;
         templateVars.user = user_id;
+        console.log('quiz-templateVars', templateVars);
         res.render("quiz", templateVars);
       })
       .catch(err => {
@@ -122,6 +123,9 @@ module.exports = (db) => {
                 db.query(submissions_query)
                   .then(() => {
                     console.log('success for submissions_query')
+
+                    return res.redirect(`results/${templateVars.quiz_id}/attempt/${attempt_id}`);
+
                   })
                   .catch(err => {
                     console.log(err)
@@ -135,7 +139,8 @@ module.exports = (db) => {
       .catch(err => {
         console.log(err);
       });
-    res.send('success')
+
   });
   return router;
 };
+

@@ -32,7 +32,7 @@
 
   <main class="container">
     <div class="results_title">
-      <div class="quiz_title">My Results: <%= quiz_name %></div>
+      <div class="quiz_title"><%= attempt_user %>'s Results: <%= quiz_name %></div>
         <div class="results_options">
           <h2 class="score">Total: <%= attempt_score %>/4</h2>
           <a class="nav-item" href="/api/quiz/<%= quiz_id %>"><button class="try_again" type="try_again">Try Again</button></a>

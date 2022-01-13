@@ -13,8 +13,24 @@ body {
   color: darkslateblue;
 }
 
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  word-spacing: 0px;
+}
+
 .nav-item {
   text-decoration: none;
+  font-weight: bold;
+  color: darkslateblue;
+  font-size: 18px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .public_quizzes {
@@ -23,7 +39,8 @@ body {
   background: #FAC7D9;
   margin-top: 10%;
   margin-bottom: 5%;
-  width: 469px;
+  width: 50%;
+  height: 100vh;
 }
 
 table {
@@ -90,6 +107,11 @@ td {
   margin: 100px;
 }
 
+.links_header {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10%;
+}
 .single_question_box{
   display: flex;
   justify-content: flex-start;

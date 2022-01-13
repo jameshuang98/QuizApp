@@ -37,10 +37,11 @@ module.exports = (db) => {
     console.log(req.body)
     let name = req.body['quizname'];
     console.log(name);
-    db.query(`INSERT INTO quizzes (user_id, name, subject, difficulty, public)
-              VALUES ($1, $2, $3, $4, $5)
+    const id = req.session.user_id;
+    db.query(`INSERT INTO quizzes (user_id, name, subject, difficulty)
+              VALUES ($1, $2, $3, $4)
               RETURNING id;`
-            , [2, name, req.body.Subject, req.body.Difficulty, false])
+            , [id, name, req.body.Subject, req.body.Difficulty])
       .then(data => {
         console.log(data.rows[0].id);
         let quizID = data.rows[0].id;
@@ -73,26 +74,10 @@ module.exports = (db) => {
             }
             // return Promise.all(promises)
           }
-
-
-          // console.log(ansData.rows[0])
-          // let questionsId = ansData.rows[0].id;
-          // let n = i + 1;
-          // console.log(ans);
-          // let answerslen = req.body[ans].length;
-          // console.log(answerslen)
-          // for(let i = 0; i < answerslen; i++){
-          //   db.query(`INSERT INTO answers (question_id, answer)
-          //   VALUES ($1, $2)
-          //   RETURNING id;`
-          // , [questionsId, req.body[ans][i]])
-
-    //  }
+          const id = req.session.user_id;
+          console.log('id is', id);
+          return res.redirect(`/api/profile/${id}`);
         })
-        .then(data => {
-          console.log(data);
-        })
-
       .catch(err => {
               res
                 .status(500)
