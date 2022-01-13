@@ -31,21 +31,19 @@
 
     <div class = "public_quizzes" id="list_public">
       <h3 class="title">Public Quizzes</h3>
-      <table>
+      <table class="public_table">
         <thead>
-        <tr>
+        <tr class="public_table_title">
           <th>Quiz Name</th>
           <th>Top Score</th>
           <th>Start Quiz</th>
         </tr>
       </thead>
-      <tbody>
-          <tr>
-            <td></td>
-          </tr>
-      </tbody>
-      </table>
-
+      <div>
+        <tbody class="list_public_quizzes">
+        </tbody>
+        </table>
+      </div>
     </div>
 
     <div class = "public_quizzes private_quizzes">
@@ -65,9 +63,17 @@
           <td><%= quiz.name %></td>
           <td><%= quiz.top_score %></td>
           <td><a class="start_quiz" href="/api/quiz/<%= quiz.id %>">Start Quiz</td>
-          <td><i class="fas fa-toggle-off" id="public"></i><i class="fas fa-toggle-on" id="hide"></i></td>
-      <% } %>
+          <td>
+            <% if (!quiz.public) { %>
+              <i class="fas fa-toggle-off public-btn publickey-<%= quiz.id %>" data-quiz_id="publickey-<%= quiz.id %>"></i>
+              <i class="fas fa-toggle-on hide private-btn privatekey-<%= quiz.id %> " data-quiz_id="privatekey-<%= quiz.id %>"></i>
+            <% } else { %>
+              <i class="fas fa-toggle-off hide public-btn publickey-<%= quiz.id %> " data-quiz_id="publickey-<%= quiz.id %>"></i>
+              <i class="fas fa-toggle-on private-btn privatekey-<%= quiz.id %>" data-quiz_id="privatekey-<%= quiz.id %>"></i>
+            <% } %>            
+          </td>
         </tr>
+      <% } %>
       </tbody>
       </table>
 
