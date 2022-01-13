@@ -4,9 +4,8 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/:user_id", (req, res) => {
     const id = req.params.user_id;
-    let query = `SELECT name, id FROM quizzes
-    WHERE quizzes.public IS false
-    AND quizzes.user_id = $1`;
+    let query = `SELECT name, id, public FROM quizzes
+    WHERE quizzes.user_id = $1`;
     // console.log(query);
     db.query(query, [id])
       .then(data => {
