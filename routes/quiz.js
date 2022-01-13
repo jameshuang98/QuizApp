@@ -4,9 +4,11 @@
  *   these routes are mounted onto /widgets
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
+
 const { text } = require('express');
 const express = require('express');
 const router = express.Router();
+
 // Getting all information for a specific quiz that the user is taking
 const getQuizFromDB = async (id, db) => {
   let query =
@@ -17,18 +19,21 @@ const getQuizFromDB = async (id, db) => {
     WHERE questions.quiz_id = $1
     ORDER BY questions.id;`;
   const data = await db.query(query, [id])
+
   const questionData = data.rows;
   const templateVars = {
     quiz_name: questionData[0].quiz_name,
     quiz_id: questionData[0].quiz_id
   }
   const questions = [];
+
   // Collecting each unique question in quiz and storing them in an array
   data.rows.forEach((q) => {
     if (!questions.includes(q.question)) {
       questions.push(q.question)
     }
   });
+
   // Looping through questions array and creating an array of answers from data.rows for each question
   templateVars.questions = questions.map((q) => {
     // Stores info on all answers for a specific question
@@ -46,8 +51,10 @@ const getQuizFromDB = async (id, db) => {
       })
     }
   });
+
   return templateVars;
 };
+
 // Getting the users score after they submit the quiz
 const getScore = async (db, submissions) => {
   let answers_query = `SELECT * FROM answers WHERE correct = true;`
@@ -62,6 +69,7 @@ const getScore = async (db, submissions) => {
   });
   return score;
 };
+
 module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const id = req.params.id
@@ -69,6 +77,7 @@ module.exports = (db) => {
       .then(templateVars => {
         const user_id = req.session.user_id;
         templateVars.user = user_id;
+        console.log('quiz-templateVars', templateVars);
         res.render("quiz", templateVars);
       })
       .catch(err => {
@@ -77,11 +86,14 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
   router.post("/:id", (req, res) => {
     // console.log('req.body', req.body)
 
     // Converting attempted answers object (req.body) into an array of arrays
     let submissions = Object.keys(req.body).map((key) => [key, req.body[key]]);
+
     // console.log('submissions', submissions)
 
     const user_id = req.session.user_id;
@@ -111,6 +123,9 @@ module.exports = (db) => {
                 db.query(submissions_query)
                   .then(() => {
                     console.log('success for submissions_query')
+
+                    return res.redirect(`results/${templateVars.quiz_id}/attempt/${attempt_id}`);
+
                   })
                   .catch(err => {
                     console.log(err)
@@ -124,7 +139,8 @@ module.exports = (db) => {
       .catch(err => {
         console.log(err);
       });
-    res.send('success')
+
   });
   return router;
 };
+

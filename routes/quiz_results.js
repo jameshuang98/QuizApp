@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/quiz/:quiz_id/attempt/:attempt_id/", (req, res) => {
+  router.get("/:quiz_id/attempt/:attempt_id/", (req, res) => {
     const quiz_id = req.params.quiz_id;
     const attempt_id = req.params.attempt_id;
     let query = `SELECT attempts.id as attempt_id, attempted_answers.id as attempted_answers_id, attempted_answers.answer_id as attempted_answer, correct, score as total, quizzes.name as quiz_name, questions.quiz_id, questions.id as question_id, questions.question, answers.id as answer_id, answers.answer
@@ -56,7 +56,7 @@ module.exports = (db) => {
           x.score = scores[index];
           index++;
         })
-        // console.log('templateVars', templateVars);
+        console.log('templateVars', templateVars);
         // console.log(templateVars.questions[0].answers);
         res.render("quiz_results", templateVars);
       })

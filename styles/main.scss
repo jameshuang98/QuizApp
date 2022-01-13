@@ -34,10 +34,11 @@ nav {
 }
 
 .public_quizzes {
+  display: flex;
+  flex-direction: column;
   background: #FAC7D9;
   margin-top: 10%;
   margin-bottom: 5%;
-  height: 612px;
   width: 469px;
 }
 
@@ -58,6 +59,8 @@ td {
 }
 
 .create_new_quiz{
+  display: flex;
+  flex-direction: column;
   background-color: #C7E4FA;
   height: 800px;
   width: 100%;
@@ -90,8 +93,8 @@ td {
 .question_box{
   display: flex;
   justify-content: flex-start;
+  flex-direction: column;
 }
-
 
 .question_options{
   display: flex;
@@ -107,4 +110,9 @@ td {
   display: flex;
   flex-direction: row;
   column-gap: 10%;
+}
+.single_question_box{
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 50px;
 }
