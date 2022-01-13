@@ -23,7 +23,7 @@ const loadPublicQuizzes = function() {
   }
 
   const turnPublic = function(key) {
-    const key_id = `${key.getAttribute("data-quiz_id")}`    
+    const key_id = `${key.getAttribute("data-quiz_id")}`
     const id = key_id.slice(-1);
     console.log('public');
     $.post("http://localhost:8080/api/public/turn_public", { id: id, public: true })
@@ -42,7 +42,7 @@ const loadPublicQuizzes = function() {
       .then(data => {
         console.log('post success');
       })
-      .catch((err) => console.log(err));  
+      .catch((err) => console.log(err));
   };
 
 $(() => {
@@ -55,7 +55,7 @@ $(() => {
       turnPublic(key);
       loadPublicQuizzes();
 
-      const key_id = `${key.getAttribute("data-quiz_id")}`    
+      const key_id = `${key.getAttribute("data-quiz_id")}`
       const id = key_id.slice(-1);
 
       $(`.privatekey-${id}`).removeClass('hide');
@@ -67,9 +67,9 @@ $(() => {
     $(key).on("click", function() {
       turnPrivate(key);
       loadPublicQuizzes();
-      const key_id = `${key.getAttribute("data-quiz_id")}`    
+      const key_id = `${key.getAttribute("data-quiz_id")}`
       const id = key_id.slice(-1);
-      
+
       $(`.privatekey-${id}`).addClass('hide');
       $(`.publickey-${id}`).removeClass('hide');
     });
@@ -78,5 +78,5 @@ $(() => {
   console.log("Ready");
   loadPublicQuizzes();
 });
-  
-  
+
+
