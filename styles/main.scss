@@ -16,7 +16,7 @@ body {
 .nav-link {
   display: flex;
   flex-direction: column;
-  justify-content: center; 
+  justify-content: center;
   word-spacing: 0px;
 }
 
@@ -116,4 +116,9 @@ td {
   display: flex;
   justify-content: flex-start;
   column-gap: 50px;
+}
+
+.solns{
+  display: flex;
+  justify-content: flex-end;
 }
