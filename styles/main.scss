@@ -4,8 +4,12 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #a3d0db;
-  background: #FFFFFF;
+  // background: rgb(163, 208, 219);
+  background: linear-gradient(
+  360deg,
+    #feada6 0%,
+    #f5efef 100%
+  );
 }
 
 .fab {
@@ -23,8 +27,8 @@ body {
 .nav-item {
   text-decoration: none;
   font-weight: bold;
-  color: darkslateblue;
-  font-size: 18px;
+  color: #4c72cc;
+  font-size: 20px;
 }
 
 nav {
@@ -36,7 +40,12 @@ nav {
 .public_quizzes {
   display: flex;
   flex-direction: column;
-  background: #FAC7D9;
+  // background-color: #FEADA6;
+  background: linear-gradient(
+  200deg,
+  #93a5cf 10%,
+  #feada6 100%
+  );
   margin-top: 10%;
   margin-bottom: 5%;
   width: 50%;

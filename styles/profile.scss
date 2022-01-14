@@ -29,7 +29,13 @@
   display: flex;
   flex-direction: column;
   width: 60%;
-  background-color: #C7E4FA;
+
+  background-color: #FEADA6;
+  background: linear-gradient(
+  200deg,
+    #feada6 0%,
+    #a896ad 100%
+  );
 }
 
 .fa-toggle-off {
@@ -44,6 +50,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-family: 'Be Vietnam Pro', sans-serif;
+
 }
 
 #list_public {

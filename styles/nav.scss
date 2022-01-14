@@ -1,11 +1,12 @@
 nav {
   height: 75px;
   width: 100%;
-  background-color: #F8F0AB;
-  color: #000000;
+  background-color: #FEADA6;
+  color: #FFFFFF;
   top: 0; /*to make the nav bar stay at the top*/
   position: fixed; /*overlaying the nav bar*/
-  font-family: 'Roboto', 'sans-serif';
+  // font-family: 'Roboto', 'sans-serif';
+  font-family: 'Be Vietnam Pro', sans-serif;
   padding: 1.5em;
   display: flex;
   justify-content: space-between;
@@ -31,6 +32,7 @@ nav {
 
 .links_header {
   word-spacing: 30px;
+  font-size: 40px;
 }
 
 .logged_in {
