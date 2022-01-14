@@ -52,6 +52,9 @@ $(() => {
   const publickeys = document.querySelectorAll(".public-btn");
   const privatekeys = document.querySelectorAll(".private-btn");
 
+  // console.log('publickeys', publickeys)
+  // console.log('privatekeys', privatekeys)
+
   publickeys.forEach((key) => {
     $(key).on("click", function() {
       console.log('inside publickeys loop')

@@ -56,8 +56,12 @@ const getQuizFromDB = async (id, db) => {
 };
 
 // Getting the users score after they submit the quiz
-const getScore = async (db, submissions) => {
-  let answers_query = `SELECT * FROM answers WHERE correct = true;`
+const getScore = async (db, submissions, id) => {
+  let answers_query = `SELECT answers.id FROM answers
+  JOIN questions ON questions.id = answers.question_id
+  JOIN quizzes ON quizzes.id = questions.quiz_id
+  WHERE correct = true AND quizzes.id = ${id};`
+  console.log('quiz_id', id);
   let score = 0;
   let data = await db.query(answers_query);
   let correct_answers_id = [];
@@ -67,8 +71,10 @@ const getScore = async (db, submissions) => {
       score++;
     }
   });
-  console.log('submissions', submissions)
-  console.log('correct', correct_answers_id)
+  console.log('score', score);
+  console.log('correct_answers_id ',correct_answers_id );
+  console.log('submissions', submissions);
+  console.log('data.rows', data.rows);
   return score;
 };
 
@@ -96,12 +102,12 @@ module.exports = (db) => {
     // Converting attempted answers object (req.body) into an array of arrays
     let submissions = Object.keys(req.body).map((key) => [key, req.body[key]]);
 
-    console.log('submissions', submissions)
+    // console.log('submissions', submissions)
 
     const user_id = req.session.user_id;
     const id = req.params.id;
     // Calculate score from submissions
-    getScore(db, submissions)
+    getScore(db, submissions, id)
       .then(score => {
         getQuizFromDB(id, db)
           .then(templateVars => {
