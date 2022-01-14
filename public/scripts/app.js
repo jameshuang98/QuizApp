@@ -16,7 +16,7 @@ const loadPublicQuizzes = function() {
         <tr class="public_table_rows">
           <td>${quiz.name}</td>
           <td>Score</td>
-          <td><a class="start_quiz" href="/api/quiz/${quiz.quiz_id}">Start Quiz</td>
+          <td><a class="start_quiz" href="/api/quiz/${quiz.id}">Start Quiz</td>
         </tr>
       `);
     }
