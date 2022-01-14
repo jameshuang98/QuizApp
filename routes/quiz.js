@@ -67,6 +67,8 @@ const getScore = async (db, submissions) => {
       score++;
     }
   });
+  console.log('submissions', submissions)
+  console.log('correct', correct_answers_id)
   return score;
 };
 
@@ -94,7 +96,7 @@ module.exports = (db) => {
     // Converting attempted answers object (req.body) into an array of arrays
     let submissions = Object.keys(req.body).map((key) => [key, req.body[key]]);
 
-    // console.log('submissions', submissions)
+    console.log('submissions', submissions)
 
     const user_id = req.session.user_id;
     const id = req.params.id;
