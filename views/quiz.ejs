@@ -26,43 +26,43 @@
 
 </head>
 
-<body>
-  <%- include('partials/_header') %>
+  <body>
+    <%- include('partials/_header') %>
 
-  <main class="container">
-    <div class="quiz_title"><%= quiz_name %> </div>
-    <section class="all_questions">
-      <form action='/api/quiz/<%= quiz_id %>' method='POST'>
+    <main class="container">
+      <div class="quiz_title"><%= quiz_name %> </div>
+      <section class="all_questions">
+        <form action='/api/quiz/<%= quiz_id %>' method='POST'>
 
-        <!-- Each article will be eventually auto-generated from the database-->
-        <% questions.forEach((item, questionIndex) => {%>
-        <article>
-          <header>
-            <div class="question">
-              <p><%= item.question %></p>
+          <!-- Each article will be eventually auto-generated from the database-->
+          <% questions.forEach((item, questionIndex) => {%>
+          <article>
+            <header>
+              <div class="question">
+                <p><%= item.question %></p>
+              </div>
+            </header>
+
+            <div class="answers">
+              <% item.answers.forEach((answer, answerIndex) => { %>
+                <p><label for='option-<%= questionIndex + 1%><%= indexToLetter(answerIndex)%>  '></label>
+
+                    <input type='radio' class='bubble' name='<%= questionIndex + 1 %>' value='<%= answer.id%>' id='option-<%= questionIndex + 1%><%= indexToLetter(answerIndex)%>'/>
+                    <%= indexToLetter(answerIndex) %>:
+                    <%= answer.text %>
+                </p>
+              <% }) %>
+
             </div>
-          </header>
 
-          <div class="answers">
-            <% item.answers.forEach((answer, answerIndex) => { %>
-              <p><label for='option-<%= questionIndex + 1%><%= indexToLetter(answerIndex)%>  '></label>
+          </article>
+          <% }) %>
 
-                  <input type='radio' class='bubble' name='<%= questionIndex + 1 %>' value='<%= answer.id%>' id='option-<%= questionIndex + 1%><%= indexToLetter(answerIndex)%>'/>
-                  <%= indexToLetter(answerIndex) %>:
-                  <%= answer.text %>
-              </p>
-            <% }) %>
+          <button class="button" type="submit" >Submit</button>
+        </form>
+      </section>
+    </main>
 
-          </div>
-
-        </article>
-        <% }) %>
-
-        <button class="button" type="submit" >Submit</button>
-      </form>
-    </section>
-  </main>
-
-</body>
+  </body>
 
 </html>

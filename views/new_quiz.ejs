@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/quiz_results.css" type="text/css" />
+
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -47,10 +49,11 @@
           <div class = "question_1">
             <div class = "single_question_box">
               <label>Question 1</label>
-              <input name = "question" required/>
+              <input class='question_input' name = "question" required/>
             </div>
             <div class = "solns">
               <div class = "question_options">
+                <div> Insert answer</div>
                 <label>A</label>
                 <input name = "answers1" required/>
                 <label>B</label>
@@ -59,6 +62,7 @@
                 <input name = "answers1" required/>
               </div>
               <div class = "question_options">
+                <div> Select correct answer</div>
                 <label>A</label>
                 <input type='radio' class='bubble' name = "soln1" value = "1" required/>
                 <label>B</label>
@@ -76,6 +80,7 @@
             </div>
             <div class = "solns">
               <div class = "question_options">
+                <div> Insert Answer </div>
                 <label>A</label>
                 <input name = "answers2" required/>
                 <label>B</label>
@@ -84,6 +89,7 @@
                 <input name = "answers2" required/>
               </div>
               <div class = "question_options">
+                <div> Select correct answer</div>
                 <label>A</label>
                 <input type='radio' class='bubble' name = "soln2" value = "1" required/>
                 <label>B</label>
@@ -101,6 +107,7 @@
             </div>
             <div class = "solns">
               <div class = "question_options">
+                <div> Insert Answer</div>
                 <label>A</label>
                 <input name = "answers3" required/>
                 <label>B</label>
@@ -109,6 +116,7 @@
                 <input name = "answers3" required/>
               </div>
               <div class = "question_options">
+                <div> Select correct answer</div>
                 <label>A</label>
                 <input type='radio' class='bubble' name = "soln3" value = "1" required/>
                 <label>B</label>
@@ -126,6 +134,7 @@
             </div>
             <div class = "solns">
               <div class = "question_options">
+                <div> Insert Answer</div>
                 <label>A</label>
                 <input name = "answers4" required/>
                 <label>B</label>
@@ -134,6 +143,7 @@
                 <input name = "answers4" required/>
               </div>
               <div class = "question_options">
+                <div> Select correct answer</div>
                 <label>A</label>
                 <input type='radio' class='bubble' name = "soln4" value = "1" required/>
                 <label>B</label>
@@ -146,7 +156,7 @@
 
         </div>
       </div>
-      <button class = "create_btn" type="submit" >Create</button>
+      <button class = 'try_again' class = "create_btn" type="submit" >Create</button>
     </form>
 
 
