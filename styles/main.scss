@@ -2,14 +2,14 @@
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  min-height: 150vh;
   // background: rgb(163, 208, 219);
   background: linear-gradient(
   360deg,
     #feada6 0%,
     #f5efef 100%
   );
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .fab {
@@ -48,7 +48,7 @@ nav {
   );
   margin-top: 10%;
   margin-bottom: 5%;
-  width: 50%;
+  width: 35%;
   height: 100vh;
 }
 
@@ -71,7 +71,6 @@ td {
 .create_new_quiz{
   display: flex;
   flex-direction: column;
-  background-color: #C7E4FA;
   height: 800px;
   width: 100%;
   margin: 100px;
@@ -108,8 +107,10 @@ td {
 
 .question_options{
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   flex-direction: column;
+  align-content: center;
+
 }
 
 .create_btn{
@@ -129,5 +130,11 @@ td {
 
 .solns{
   display: flex;
-  justify-content: flex-end;
+  column-gap:60px;
+  justify-content: space-between;
 }
+
+// .question_input {
+//   width: 100%;
+//   height: 50%;
+// }
