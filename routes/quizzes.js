@@ -17,7 +17,7 @@ module.exports = (db) => {
     db.query(query)
       .then(data => {
         const quizzes = data.rows;
-        console.log(quizzes);
+        console.log('quizzes', quizzes);
 
         const arr = [];
         quizzes.forEach((x) => {
@@ -30,11 +30,11 @@ module.exports = (db) => {
 
         // CONCAT((cast(attempts.score as float) / cast(count(quizzes.id) as float)) * 100, '%')
 
-        let query2 = `SELECT quizzes.name, CONCAT(MAX(score) / 4 * 100, '%') as top_score
+        let query2 = `SELECT quizzes.name, quizzes.id, CONCAT(MAX(score) / 4 * 100, '%') as top_score
         FROM attempts
         RIGHT JOIN quizzes ON attempts.quiz_id = quizzes.id
         WHERE quizzes.id IN (${str})
-        GROUP BY quizzes.name
+        GROUP BY quizzes.name, quizzes.id
         ;`
         console.log(query2);
         db.query(query2)

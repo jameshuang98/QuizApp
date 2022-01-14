@@ -16,7 +16,7 @@ const loadPublicQuizzes = function() {
         <tr class="public_table_rows">
           <td>${quiz.name}</td>
           <td>Score</td>
-          <td><a class="start_quiz" href="/api/quiz/${quiz.id}">Start Quiz</td>
+          <td><a class="start_quiz" href="/api/quiz/${quiz.quiz_id}">Start Quiz</td>
         </tr>
       `);
     }
@@ -24,19 +24,24 @@ const loadPublicQuizzes = function() {
 
   const turnPublic = function(key) {
     const key_id = `${key.getAttribute("data-quiz_id")}`
-    const id = key_id.slice(-1);
-    console.log('public');
+    const parts = key_id.split('-', 2);
+    const id = parts[1];
+    console.log('id inside turnPublic', id);
+
     $.post("http://localhost:8080/api/public/turn_public", { id: id, public: true })
       .then(data => {
         console.log('post success');
+        console.log({ id: id, public: true });
+
       })
       .catch((err) => console.log(err));
   };
 
   const turnPrivate = function(key) {
     const key_id = `${key.getAttribute("data-quiz_id")}`
-    const id = key_id.slice(-1);
-    console.log('private');
+    const parts = key_id.split('-', 2);
+    const id = parts[1];
+    console.log('id inside turnPrivate', id);
 
     $.post("http://localhost:8080/api/public/turn_public", { id: id, public: false })
       .then(data => {
@@ -49,6 +54,9 @@ $(() => {
   const publickeys = document.querySelectorAll(".public-btn");
   const privatekeys = document.querySelectorAll(".private-btn");
 
+  // console.log('publickeys', publickeys)
+  // console.log('privatekeys', privatekeys)
+
   publickeys.forEach((key) => {
     $(key).on("click", function() {
       console.log('inside publickeys loop')
@@ -56,7 +64,8 @@ $(() => {
       loadPublicQuizzes();
 
       const key_id = `${key.getAttribute("data-quiz_id")}`
-      const id = key_id.slice(-1);
+      const parts = key_id.split('-', 2);
+      const id = parts[1];
 
       $(`.privatekey-${id}`).removeClass('hide');
       $(`.publickey-${id}`).addClass('hide');
@@ -68,7 +77,8 @@ $(() => {
       turnPrivate(key);
       loadPublicQuizzes();
       const key_id = `${key.getAttribute("data-quiz_id")}`
-      const id = key_id.slice(-1);
+      const parts = key_id.split('-', 2);
+      const id = parts[1];
 
       $(`.privatekey-${id}`).addClass('hide');
       $(`.publickey-${id}`).removeClass('hide');

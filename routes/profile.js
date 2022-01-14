@@ -3,11 +3,12 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/:user_id", (req, res) => {
-    const id = req.session.user_id;
+    const id = req.params.user_id;
     let query = `
-    SELECT users.id, users.name, quizzes.id as quiz_id, quizzes.public, quizzes.name as quiz_name FROM users
-    FULL OUTER JOIN quizzes ON users.id = quizzes.user_id
-    WHERE users.id = 4;
+    SELECT users.id as user_id, users.name as user_name, quizzes.name, quizzes.id as quiz_id, quizzes.public
+    FROM quizzes
+    JOIN users ON users.id = quizzes.user_id
+    WHERE quizzes.user_id = $1;
     `;
     // console.log(query);
     db.query(query, [id])

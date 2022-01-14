@@ -57,24 +57,26 @@
           <th>Public</th>
         </tr>
       </thead>
+      <% if (quizzes[0].quiz_id) { %>
       <tbody>
       <%  for(let quiz of quizzes) { %>
         <tr>
           <td><%= quiz.name %></td>
           <td><%= quiz.top_score %></td>
-          <td><a class="start_quiz" href="/api/quiz/<%= quiz.id %>">Start Quiz</td>
+          <td><a class="start_quiz" href="/api/quiz/<%= quiz.quiz_id %>">Start Quiz</td>
           <td>
             <% if (!quiz.public) { %>
-              <i class="fas fa-toggle-off public-btn publickey-<%= quiz.id %>" data-quiz_id="publickey-<%= quiz.id %>"></i>
-              <i class="fas fa-toggle-on hide private-btn privatekey-<%= quiz.id %> " data-quiz_id="privatekey-<%= quiz.id %>"></i>
+              <i class="fas fa-toggle-off public-btn publickey-<%= quiz.quiz_id %>" data-quiz_id="publickey-<%= quiz.quiz_id %>"></i>
+              <i class="fas fa-toggle-on hide private-btn privatekey-<%= quiz.quiz_id %> " data-quiz_id="privatekey-<%= quiz.quiz_id %>"></i>
             <% } else { %>
-              <i class="fas fa-toggle-off hide public-btn publickey-<%= quiz.id %> " data-quiz_id="publickey-<%= quiz.id %>"></i>
-              <i class="fas fa-toggle-on private-btn privatekey-<%= quiz.id %>" data-quiz_id="privatekey-<%= quiz.id %>"></i>
+              <i class="fas fa-toggle-off hide public-btn publickey-<%= quiz.quiz_id %> " data-quiz_id="publickey-<%= quiz.quiz_id %>"></i>
+              <i class="fas fa-toggle-on private-btn privatekey-<%= quiz.quiz_id %>" data-quiz_id="privatekey-<%= quiz.quiz_id %>"></i>
             <% } %>            
           </td>
         </tr>
       <% } %>
-      </tbody>
+    </tbody>
+    <% } %>
       </table>
 
     </div>
