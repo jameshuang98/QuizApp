@@ -27,7 +27,8 @@ module.exports = (db) => {
           attempt_user: results[0].attempt_user,
           attempt_score: results[0].total,
           quiz_name: results[0].quiz_name,
-          quiz_id: results[0].quiz_id
+          quiz_id: results[0].quiz_id,
+          attempt_id: results[0].attempt_id
         };
          console.log('templateVars', templateVars);
 
