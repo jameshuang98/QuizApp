@@ -63,13 +63,17 @@ module.exports = (db) => {
             console.log(questionId);
             n += 1;
             const ans = 'answers' + n;
+            const sol = 'soln' + n;
             let answerslen = req.body[ans].length;
+            const solution =  Number(req.body[sol]);
             console.log(ans)
             for(let i = 0; i < answerslen; i++){
-            db.query(`INSERT INTO answers (question_id, answer)
-                VALUES ($1, $2)
+              const isAnsCorr = solution === i + 1;
+
+            db.query(`INSERT INTO answers (question_id, answer,correct)
+                VALUES ($1, $2, $3)
                 RETURNING id;`
-              , [questionId, req.body[ans][i]])
+              , [questionId, req.body[ans][i], isAnsCorr])
               // promises.push(answers)
             }
             // return Promise.all(promises)

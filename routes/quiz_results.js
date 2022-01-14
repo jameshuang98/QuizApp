@@ -29,7 +29,7 @@ module.exports = (db) => {
           quiz_name: results[0].quiz_name,
           quiz_id: results[0].quiz_id
         };
-        // console.log('templateVars', templateVars);
+         console.log('templateVars', templateVars);
 
         const questions = [];
         data.rows.forEach((i) => {
