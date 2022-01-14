@@ -19,8 +19,8 @@ const getQuizFromDB = async (id, db) => {
     WHERE questions.quiz_id = $1
     ORDER BY questions.id;`;
   const data = await db.query(query, [id])
-
   const questionData = data.rows;
+  console.log(questionData)
   const templateVars = {
     quiz_name: questionData[0].quiz_name,
     quiz_id: questionData[0].quiz_id

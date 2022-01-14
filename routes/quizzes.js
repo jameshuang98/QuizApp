@@ -36,7 +36,7 @@ module.exports = (db) => {
         WHERE quizzes.id IN (${str})
         GROUP BY quizzes.name, quizzes.id
         ;`
-        console.log(query2);
+        // console.log(query2);
         db.query(query2)
         .then(data => {
           const user_id = req.session.user_id;
@@ -49,7 +49,7 @@ module.exports = (db) => {
         res.render("index", templateVars);
         })
         // check if user logged in
-        
+
       })
       .catch(err => {
         res
