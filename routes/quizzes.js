@@ -16,7 +16,7 @@ module.exports = (db) => {
     db.query(query)
       .then(data => {
         const quizzes = data.rows;
-        console.log(quizzes);
+        console.log('quizzes', quizzes);
 
         const arr = [];
         quizzes.forEach((x) => {
