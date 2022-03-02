@@ -1,12 +1,12 @@
 nav {
-  height: 70px;
+  height: 75px;
   width: 100%;
-  color: #ffffff;
-  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  color: #DCDFEA;
+  background-image: linear-gradient(to top, #EAE7DC 100%, #e2ebf0 0%);
   top: 0; /*to make the nav bar stay at the top*/
   position: fixed; /*overlaying the nav bar*/
   font-family: "Be Vietnam Pro", sans-serif;
-  padding: 1.5em;
+  padding: 2.5em;
   display: flex;
   align-items: center;
   flex-direction: row;

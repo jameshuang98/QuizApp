@@ -8,8 +8,9 @@ body {
     #f5efef 100%
   );
   font-family: "Be Vietnam Pro", sans-serif;
-  background-color: #8c8cd4;
-  background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
+  background-color: #58c4b2;
+  // background-color: #88a0c9;
+  background-image: url("https://www.transparenttextures.com/patterns/diagmonds-light.png");
   z-index : -1;
 }
 
@@ -26,7 +27,7 @@ p.login_msg {
 }
 
 span.login_msg {
-  background-color: #fffdd0;
+  background-color: #EAE7DC;
   border-radius: 15px 15px 15px 15px;
   display: flex;
   flex-direction: column;
@@ -43,7 +44,7 @@ span.login_msg {
   width: 50%;
   height: 100vh;
   border-radius: 30px 30px 30px 30px;
-  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  background-image: linear-gradient(125deg, #EAE7DC 0%, #DCDFEA 100%);
 }
 
 table {
