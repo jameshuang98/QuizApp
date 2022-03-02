@@ -16,93 +16,101 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script>
     function myFunction(num) {
-     /* Get the text field */
-     var copyText = document.getElementById(`myInput-${num}`);
+      /* Get the text field */
+      var copyText = document.getElementById(`myInput-${num}`);
 
-     /* Select the text field */
-     copyText.select();
-     copyText.setSelectionRange(0, 99999); /* For mobile devices */
+      /* Select the text field */
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
-     /* Copy the text inside the text field */
-     navigator.clipboard.writeText(copyText.value);
+      /* Copy the text inside the text field */
+      navigator.clipboard.writeText(copyText.value);
 
-   }
-   </script>
+    }
+  </script>
   <!-- Font awesome library-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
   <!-- fonts for CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500&family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500&family=Source+Sans+Pro:wght@600&display=swap"
+    rel="stylesheet">
 
 </head>
+
 <body>
   <%- include('partials/_header') %>
 
-  <main class="profile_container">
+    <main class="profile_container">
 
-    <div class = "public_quizzes" id="list_public">
-      <h3 class="title">Public Quizzes</h3>
-      <table class="public_table">
-        <thead>
-        <tr class="public_table_title">
-          <th>Quiz Name</th>
-          <!-- <th>Top Score</th> -->
-          <th>Start Quiz</th>
-        </tr>
-      </thead>
-      <div>
-        <tbody class="list_public_quizzes">
-        </tbody>
+      <div class="public_quizzes" id="list_public">
+        <h3 class="title">Public Quizzes</h3>
+        <table class="public_table">
+          <thead>
+            <tr class="public_table_title">
+              <th>Quiz Name</th>
+              <!-- <th>Top Score</th> -->
+              <th>Start Quiz</th>
+            </tr>
+          </thead>
+          <div>
+            <tbody class="list_public_quizzes">
+            </tbody>
         </table>
       </div>
-    </div>
+      </div>
 
-    <div class = "public_quizzes private_quizzes">
-      <h3 class="title">My Quizzes</h3>
-      <table>
-        <thead>
-        <tr>
-          <th>Quiz Name</th>
-          <th>Share Quiz</th>
-          <th>Start Quiz</th>
-          <th>Public</th>
-        </tr>
-      </thead>
-      <% if (quizzes[0].id) { %>
-      <tbody>
-        <%  for(let quiz of quizzes) { %>
-          <tr>
-            <td><%= quiz.name %></td>
-            <td>
+      <div class="private_quizzes">
+        <h3 class="title">My Quizzes</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Quiz Name</th>
+              <th>Share Quiz</th>
+              <th>Start Quiz</th>
+              <th>Public</th>
+            </tr>
+          </thead>
+          <% if (quizzes[0].id) { %>
+            <tbody>
+              <% for(let quiz of quizzes) { %>
+                <tr>
+                  <td>
+                    <%= quiz.name %>
+                  </td>
+                  <td>
 
-              <input class='hide' type="text" value="http://localhost:8080/api/quiz/<%= quiz.id %>" id="myInput-<%=quiz.id%>">
-              <button class="copy_link" onclick="myFunction(`<%=quiz.id%>`)">Copy Link</button>
+                    <input class='hide' type="text" value="http://localhost:8080/quiz/<%= quiz.id %>"
+                      id="myInput-<%=quiz.id%>">
+                    <button class="copy_link" onclick="myFunction(`<%=quiz.id%>`)">Copy Link</button>
 
-            </td>
-            <td><a class="start_quiz" href="/api/quiz/<%= quiz.id %>">Start Quiz</td>
-            <td>
-              <% if (!quiz.public) { %>
-                <i class="fas fa-toggle-off public-btn publickey-<%= quiz.id %>" data-quiz_id="publickey-<%= quiz.id %>"></i>
-                <i class="fas fa-toggle-on hide private-btn privatekey-<%= quiz.id %> " data-quiz_id="privatekey-<%= quiz.id %>"></i>
-              <% } else { %>
-                <i class="fas fa-toggle-off hide public-btn publickey-<%= quiz.id %> " data-quiz_id="publickey-<%= quiz.id %>"></i>
-                <i class="fas fa-toggle-on private-btn privatekey-<%= quiz.id %>" data-quiz_id="privatekey-<%= quiz.id %>"></i>
-              <% } %>
-            </td>
-          </tr>
-        <% } %>
-      </tbody>
-      <% } %>
-      </table>
-
-    </div>
-
-  </main>
-
+                  </td>
+                  <td><a class="start_quiz" href="/quiz/<%= quiz.id %>">Start Quiz</td>
+                  <td>
+                    <% if (!quiz.public) { %>
+                      <i class="fas fa-toggle-off public-btn publickey-<%= quiz.id %>"
+                        data-quiz_id="publickey-<%= quiz.id %>"></i>
+                      <i class="fas fa-toggle-on hide private-btn privatekey-<%= quiz.id %> "
+                        data-quiz_id="privatekey-<%= quiz.id %>"></i>
+                      <% } else { %>
+                        <i class="fas fa-toggle-off hide public-btn publickey-<%= quiz.id %> "
+                          data-quiz_id="publickey-<%= quiz.id %>"></i>
+                        <i class="fas fa-toggle-on private-btn privatekey-<%= quiz.id %>"
+                          data-quiz_id="privatekey-<%= quiz.id %>"></i>
+                        <% } %>
+                  </td>
+                </tr>
+                <% } %>
+            </tbody>
+            <% } %>
+        </table>
+      </div>
+    </main>
 </body>
 
 </html>
