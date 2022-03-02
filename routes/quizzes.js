@@ -9,7 +9,6 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  console.log("hello");
   router.get("/public", (req, res) => {
     let query = `SELECT name, id FROM quizzes WHERE public = true;
     `;
@@ -30,7 +29,7 @@ module.exports = (db) => {
 
         // CONCAT((cast(attempts.score as float) / cast(count(quizzes.id) as float)) * 100, '%')
 
-        let query2 = `SELECT quizzes.name, quizzes.id, CONCAT(MAX(score) / 4 * 100, '%') as top_score
+        let query2 = `SELECT quizzes.name, quizzes.id, CONCAT(cast(MAX(score) as float) / 4 * 100, '%') as top_score
         FROM attempts
         RIGHT JOIN quizzes ON attempts.quiz_id = quizzes.id
         WHERE quizzes.id IN (${str})
