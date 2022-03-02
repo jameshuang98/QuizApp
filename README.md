@@ -10,16 +10,16 @@ QuizApp is a full-stack multi-page quiz application built with Express.js, Node.
 - Review results for a taken quiz
 - Share link for others to take a quiz or view results
 
-<!-- ## Final Product
-!["Screenshot of profile page with public and private quizzes"](/docs/toggle-private.png)
+## Final Product
+!["Screenshot of profile page with public and private quizzes lists"](https://github.com/jameshuang98/QuizApp/blob/master/public/images/profile.png?raw=true)
 
-!["Screenshot of creating a quiz"](/docs/create-quiz.png)
+!["Screenshot of quiz page"](https://github.com/jameshuang98/QuizApp/blob/master/public/images/quiz.png?raw=true)
 
-!["Screenshot of taking a quiz"](/docs/take-quiz.png)
+!["Screenshot of quiz results page"](/docs/quiz-results.png)
 
-!["Screenshot of quiz results"](/docs/quiz-results.png)
+!["Screenshot of quiz creation page"](https://github.com/jameshuang98/QuizApp/blob/master/public/images/quiz_results.png?raw=true)
 
-!["Screenshot of homepage with top score"](/docs/home-top-score.png) -->
+!["Screenshot of homepage with list of public quizzes"](https://github.com/jameshuang98/QuizApp/blob/master/public/images/homepage.png?raw=true)
 
 ## Getting Started
 
